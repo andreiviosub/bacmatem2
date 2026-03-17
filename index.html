@@ -899,6 +899,30 @@
       </div>
     </div>
 
+    <div class="nav-subject" data-subject="s6">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">⚡</span> Tabel rapid
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#siruri">Șiruri și progresii</a>
+        <a class="nav-item" href="#tabel-rapid">Derivate &amp; Primitive</a>
+        <a class="nav-item" href="#grafice-tip">Grafice tip</a>
+      </div>
+    </div>
+
+    <div class="nav-subject" data-subject="s7">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">⚠️</span> Pregătire BAC
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#greseli">Greșeli frecvente</a>
+        <a class="nav-item" href="#tipare">Tipare subiecte BAC</a>
+        <a class="nav-item" href="#exercitii">Exerciții rezolvate</a>
+      </div>
+    </div>
+
   </div><!-- end sidebar-nav -->
   </div><!-- end sidebar-scroll -->
 </nav>
@@ -923,7 +947,7 @@
         <span class="hero-stat-label">Subiecte BAC</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-val">15+</span>
+        <span class="hero-stat-val">20+</span>
         <span class="hero-stat-label">Capitole</span>
       </div>
       <div class="hero-stat">
@@ -931,7 +955,7 @@
         <span class="hero-stat-label">Formule</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-val">50+</span>
+        <span class="hero-stat-val">80+</span>
         <span class="hero-stat-label">Exemple rezolvate</span>
       </div>
     </div>
@@ -1728,6 +1752,476 @@
     </div>
 
     <!-- DREAPTA -->
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         ȘIRURI — PROGRESII
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="siruri">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Șiruri — Progresii</h2>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Progresia aritmetică</div>
+        <p>Un șir în care diferența dintre doi termeni consecutivi este constantă.</p>
+        <div class="mjx-block">
+          <div class="math-row">\( {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n+1}}} - {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n}}} = {{\color{#67e8f9}{r}}} = \text{const.} \) <span class="math-comment">// rația progresiei</span></div>
+          <div class="math-row">\( {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n}}} = {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{1}}} + ({\color{#fcd34d}{n}}-{\color{#fcd34d}{1}}) \cdot {\color{#67e8f9}{r}} \) <span class="math-comment">// termenul general</span></div>
+          <div class="math-row">\( {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n}}} = \dfrac{{{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n-1}}} + {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n+1}}}}{{\color{#fcd34d}{2}}} \) <span class="math-comment">// media aritmetică</span></div>
+          <div class="math-row">\( {\color{#86efac}{S}}_{{\color{#fcd34d}{n}}} = \dfrac{{\color{#fcd34d}{n}} \cdot ({{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{1}}} + {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{n}}})}{{\color{#fcd34d}{2}}} \) <span class="math-comment">// suma primilor n termeni</span></div>
+          <div class="math-row">\( {\color{#86efac}{S}}_{{\color{#fcd34d}{n}}} = {\color{#fcd34d}{n}} \cdot {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{1}}} + \dfrac{{\color{#fcd34d}{n}}({\color{#fcd34d}{n}}-{\color{#fcd34d}{1}})}{{\color{#fcd34d}{2}}} \cdot {\color{#67e8f9}{r}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#fcd34d}{2}}, {\color{#fcd34d}{5}}, {\color{#fcd34d}{8}}, {\color{#fcd34d}{11}}, \ldots\) — găsește \({{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{10}}}\) și \({\color{#86efac}{S}}_{{\color{#fcd34d}{10}}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#67e8f9}{r}} = {\color{#fcd34d}{5}}-{\color{#fcd34d}{2}} = {\color{#fcd34d}{3}},\quad {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{1}}} = {\color{#fcd34d}{2}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {{\color{#93c5fd}{a}}}_{{\color{#fcd34d}{10}}} = {\color{#fcd34d}{2}} + {\color{#fcd34d}{9}} \cdot {\color{#fcd34d}{3}} = {\color{#fcd34d}{29}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#86efac}{S}}_{{\color{#fcd34d}{10}}} = \dfrac{{\color{#fcd34d}{10}}({\color{#fcd34d}{2}}+{\color{#fcd34d}{29}})}{{\color{#fcd34d}{2}}} = {\color{#fcd34d}{155}} \)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Progresia geometrică</div>
+        <p>Un șir în care raportul dintre doi termeni consecutivi este constant.</p>
+        <div class="mjx-block">
+          <div class="math-row">\( \dfrac{{{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{n+1}}}}{{{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{n}}}} = {\color{#67e8f9}{q}} = \text{const.} \) <span class="math-comment">// rația progresiei</span></div>
+          <div class="math-row">\( {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{n}}} = {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{1}}} \cdot {\color{#67e8f9}{q}}^{{\color{#fb923c}{n-1}}} \) <span class="math-comment">// termenul general</span></div>
+          <div class="math-row">\( {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{n}}}^{{\color{#fb923c}{2}}} = {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{n-1}}} \cdot {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{n+1}}} \) <span class="math-comment">// media geometrică</span></div>
+          <div class="math-row">\( {\color{#86efac}{S}}_{{\color{#fcd34d}{n}}} = {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{1}}} \cdot \dfrac{{\color{#67e8f9}{q}}^{{\color{#fb923c}{n}}} - {\color{#fcd34d}{1}}}{{\color{#67e8f9}{q}} - {\color{#fcd34d}{1}}} \quad ({\color{#67e8f9}{q}} \ne {\color{#fcd34d}{1}}) \) <span class="math-comment">// suma primilor n termeni</span></div>
+          <div class="math-row">\( {\color{#86efac}{S}}_{\infty} = \dfrac{{{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{1}}}}{{\color{#fcd34d}{1}}-{\color{#67e8f9}{q}}} \quad (|{\color{#67e8f9}{q}}| < {\color{#fcd34d}{1}}) \) <span class="math-comment">// suma seriei infinite convergente</span></div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#fcd34d}{3}}, {\color{#fcd34d}{6}}, {\color{#fcd34d}{12}}, {\color{#fcd34d}{24}}, \ldots\) — găsește \({{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{7}}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#67e8f9}{q}} = \dfrac{{\color{#fcd34d}{6}}}{{\color{#fcd34d}{3}}} = {\color{#fcd34d}{2}},\quad {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{1}}} = {\color{#fcd34d}{3}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {{\color{#93c5fd}{b}}}_{{\color{#fcd34d}{7}}} = {\color{#fcd34d}{3}} \cdot {\color{#fcd34d}{2}}^{{\color{#fb923c}{6}}} = {\color{#fcd34d}{3}} \cdot {\color{#fcd34d}{64}} = {\color{#fcd34d}{192}} \)</div>
+        </div>
+        <div class="tip-block"><p>Dacă \({\color{#67e8f9}{q}} > {\color{#fcd34d}{1}}\) → progresie crescătoare; dacă \({\color{#fcd34d}{0}} < {\color{#67e8f9}{q}} < {\color{#fcd34d}{1}}\) → descrescătoare; dacă \({\color{#67e8f9}{q}} < {\color{#fcd34d}{0}}\) → termenii alternează semn.</p></div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Limita unui șir</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#fcd34d}{n}} \to \infty} {\color{#67e8f9}{q}}^{{\color{#fb923c}{n}}} = {\color{#fcd34d}{0}} \quad \text{dacă } |{\color{#67e8f9}{q}}| < {\color{#fcd34d}{1}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#fcd34d}{n}} \to \infty} \dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{n}}^{{\color{#fb923c}{k}}}} = {\color{#fcd34d}{0}} \quad ({\color{#fb923c}{k}} > {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#fcd34d}{n}} \to \infty} \sqrt[{\color{#fb923c}{n}}]{{\color{#93c5fd}{a}}} = {\color{#fcd34d}{1}} \quad ({\color{#93c5fd}{a}} > {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#fcd34d}{n}} \to \infty} \left({\color{#fcd34d}{1}} + \dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{n}}}\right)^{{\color{#fb923c}{n}}} = {\color{#fcd34d}{e}} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         TABEL RAPID — DERIVATE + PRIMITIVE
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="tabel-rapid">
+      <div class="section-header">
+        <span class="section-number">⚡</span>
+        <h2 class="section-title">Tabel rapid — Derivate & Primitive</h2>
+      </div>
+      <p>Toate formulele esențiale pe o singură pagină — ideal pentru recapitulare rapidă înainte de examen.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Derivate + Primitive — complet</div>
+        <table class="math-table">
+          <thead>
+            <tr><th>f(x)</th><th>f′(x)</th><th>∫f(x)dx</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\({\color{#93c5fd}{c}}\)</td>
+              <td>\({\color{#fcd34d}{0}}\)</td>
+              <td>\({\color{#93c5fd}{c}}{\color{#93c5fd}{x}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{x}}^{{\color{#fb923c}{n}}}\)</td>
+              <td>\({\color{#fb923c}{n}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{n-1}}}\)</td>
+              <td>\(\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{n+1}}}}{{\color{#fb923c}{n+1}}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#86efac}{\sqrt{{\color{#93c5fd}{x}}}}}\)</td>
+              <td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}{\color{#86efac}{\sqrt{{\color{#93c5fd}{x}}}}}}\)</td>
+              <td>\(\dfrac{{\color{#fcd34d}{2}}}{{\color{#fcd34d}{3}}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{3/2}}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}\)</td>
+              <td>\(-\dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}}\)</td>
+              <td>\({\color{#86efac}{\ln}}|{\color{#93c5fd}{x}}| + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#fcd34d}{e}}^{{\color{#fb923c}{x}}}\)</td>
+              <td>\({\color{#fcd34d}{e}}^{{\color{#fb923c}{x}}}\)</td>
+              <td>\({\color{#fcd34d}{e}}^{{\color{#fb923c}{x}}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{a}}^{{\color{#fb923c}{x}}}\)</td>
+              <td>\({\color{#93c5fd}{a}}^{{\color{#fb923c}{x}}} {\color{#86efac}{\ln}} {\color{#93c5fd}{a}}\)</td>
+              <td>\(\dfrac{{\color{#93c5fd}{a}}^{{\color{#fb923c}{x}}}}{{\color{#86efac}{\ln}} {\color{#93c5fd}{a}}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#86efac}{\ln}} {\color{#93c5fd}{x}}\)</td>
+              <td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}\)</td>
+              <td>\({\color{#93c5fd}{x}}{\color{#86efac}{\ln}}{\color{#93c5fd}{x}} - {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#86efac}{\sin}} {\color{#93c5fd}{x}}\)</td>
+              <td>\({\color{#86efac}{\cos}} {\color{#93c5fd}{x}}\)</td>
+              <td>\(-{\color{#86efac}{\cos}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#86efac}{\cos}} {\color{#93c5fd}{x}}\)</td>
+              <td>\(-{\color{#86efac}{\sin}} {\color{#93c5fd}{x}}\)</td>
+              <td>\({\color{#86efac}{\sin}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#86efac}{\tan}} {\color{#93c5fd}{x}}\)</td>
+              <td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}}\)</td>
+              <td>\(-{\color{#86efac}{\ln}}|{\color{#86efac}{\cos}}{\color{#93c5fd}{x}}| + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#86efac}{\cot}} {\color{#93c5fd}{x}}\)</td>
+              <td>\(-\dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}}\)</td>
+              <td>\({\color{#86efac}{\ln}}|{\color{#86efac}{\sin}}{\color{#93c5fd}{x}}| + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sqrt{{\color{#fcd34d}{1}}-{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}}}}}\)</td>
+              <td>—</td>
+              <td>\({\color{#86efac}{\arcsin}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+            <tr>
+              <td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{1}}+{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}}\)</td>
+              <td>—</td>
+              <td>\({\color{#86efac}{\arctan}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}}\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Valori de reținut</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}} \approx {\color{#fcd34d}{1.414}} \qquad {\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}} \approx {\color{#fcd34d}{1.732}} \qquad {\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}} \approx {\color{#fcd34d}{2.236}} \)</div>
+          <div class="math-row">\( {\color{#fcd34d}{e}} \approx {\color{#fcd34d}{2.718}} \qquad {\color{#fcd34d}{\pi}} \approx {\color{#fcd34d}{3.14159}} \qquad {\color{#86efac}{\ln}} {\color{#fcd34d}{2}} \approx {\color{#fcd34d}{0.693}} \qquad {\color{#86efac}{\ln}} {\color{#fcd34d}{10}} \approx {\color{#fcd34d}{2.303}} \)</div>
+          <div class="math-row">\( {\color{#fcd34d}{1}} \text{ rad} \approx {\color{#fcd34d}{57.3}}° \qquad \dfrac{{\color{#fcd34d}{\pi}}}{{\color{#fcd34d}{180}}} \approx {\color{#fcd34d}{0.01745}} \text{ rad}/° \)</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         GRAFICE TIP
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="grafice-tip">
+      <div class="section-header">
+        <span class="section-number">📐</span>
+        <h2 class="section-title">Grafice tip ale funcțiilor</h2>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Funcții elementare — caracteristici</div>
+        <table class="math-table">
+          <thead><tr><th>Funcție</th><th>Domeniu</th><th>Imagine</th><th>Proprietăți cheie</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>\([{\color{#fcd34d}{0}}, +\infty)\)</td>
+              <td>Parabolă ↑, pară, min în \(({\color{#fcd34d}{0}},{\color{#fcd34d}{0}})\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#93c5fd}{x}}^{{\color{#fb923c}{3}}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>Impară, strict crescătoare, inflexiune în \({\color{#fcd34d}{0}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{\sqrt{{\color{#93c5fd}{x}}}}}\)</td>
+              <td>\([{\color{#fcd34d}{0}}, +\infty)\)</td>
+              <td>\([{\color{#fcd34d}{0}}, +\infty)\)</td>
+              <td>Crescătoare, concavă ↓, \({\color{#93c5fd}{f}}'({\color{#fcd34d}{0}}^+) = +\infty\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{|}}{{\color{#93c5fd}{x}}}{\color{#86efac}{|}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>\([{\color{#fcd34d}{0}}, +\infty)\)</td>
+              <td>Pară, min în \({\color{#fcd34d}{0}}\), nederiabilă în \({\color{#fcd34d}{0}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = \dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}} \setminus \{{\color{#fcd34d}{0}}\}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}} \setminus \{{\color{#fcd34d}{0}}\}\)</td>
+              <td>Impară, hiperbolă, asimptote \({\color{#93c5fd}{x}}={\color{#fcd34d}{0}}\) și \({\color{#93c5fd}{y}}={\color{#fcd34d}{0}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#fcd34d}{e}}^{{\color{#fb923c}{x}}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>\(({\color{#fcd34d}{0}}, +\infty)\)</td>
+              <td>Convexă ↑, trece prin \(({\color{#fcd34d}{0}},{\color{#fcd34d}{1}})\), asimptotă \({\color{#93c5fd}{y}}={\color{#fcd34d}{0}}\) la \(-\infty\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{\ln}} {\color{#93c5fd}{x}}\)</td>
+              <td>\(({\color{#fcd34d}{0}}, +\infty)\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>Concavă ↓, trece prin \(({\color{#fcd34d}{1}},{\color{#fcd34d}{0}})\), asimptotă \({\color{#93c5fd}{x}}={\color{#fcd34d}{0}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{\sin}} {\color{#93c5fd}{x}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>\([-{\color{#fcd34d}{1}}, {\color{#fcd34d}{1}}]\)</td>
+              <td>Impară, periodică \(T={\color{#fcd34d}{2\pi}}\), max \(\frac{{\color{#fcd34d}{\pi}}}{{\color{#fcd34d}{2}}}\), min \(\frac{{\color{#fcd34d}{3\pi}}}{{\color{#fcd34d}{2}}}\)</td>
+            </tr>
+            <tr>
+              <td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{\cos}} {\color{#93c5fd}{x}}\)</td>
+              <td>\({\color{#67e8f9}{\mathbb{R}}}\)</td>
+              <td>\([-{\color{#fcd34d}{1}}, {\color{#fcd34d}{1}}]\)</td>
+              <td>Pară, periodică \(T={\color{#fcd34d}{2\pi}}\), max în \({\color{#fcd34d}{0}}\), min în \({\color{#fcd34d}{\pi}}\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Transformări ale graficelor</div>
+        <div class="mjx-block">
+          <div class="math-label">Dacă cunoști graficul lui f(x), poți construi:</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) + {\color{#fcd34d}{k}} \) <span class="math-comment">// translație verticală cu k unități în sus</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#93c5fd}{x}} + {\color{#fcd34d}{h}}) \) <span class="math-comment">// translație orizontală cu h unități la stânga</span></div>
+          <div class="math-row">\( -{\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) \) <span class="math-comment">// simetrie față de Ox</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}(-{\color{#93c5fd}{x}}) \) <span class="math-comment">// simetrie față de Oy</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{k}} \cdot {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) \) <span class="math-comment">// dilatare verticală cu factorul k</span></div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{f}}({\color{#93c5fd}{x}}){\color{#86efac}{|}} \) <span class="math-comment">// păstrezi ce e deasupra Ox, reflectezi ce e sub Ox</span></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         GREȘELI FRECVENTE LA BAC
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="greseli">
+      <div class="section-header">
+        <span class="section-number">⚠️</span>
+        <h2 class="section-title">Greșeli frecvente la BAC</h2>
+      </div>
+      <p>Acestea sunt cele mai comune greșeli care costă puncte la examen. Citește-le cu atenție!</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Greșeli la logaritmi</div>
+        <div class="warn-block">
+          <p>❌ <strong>\(\log_a(x+y) = \log_a x + \log_a y\)</strong> — FALS! Suma argumentelor NU se separă. Regula corectă e pentru produs: \(\log_a(x \cdot y)\).</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>Uitatul condițiilor de existență</strong> — orice ecuație/inecuație logaritmică necesită \(x > 0\) pentru fiecare argument. Fără verificare = puncte pierdute.</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>Sensul inegalității la bază subunitară</strong> — dacă \(0 < a < 1\), atunci \(\log_a f(x) < \log_a g(x) \implies f(x) > g(x)\). Sensul SE INVERSEAZĂ!</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Greșeli la derivare și integrare</div>
+        <div class="warn-block">
+          <p>❌ <strong>Uitarea regulii lanțului</strong> — \((\sin(x^2))' = \cos(x^2)\) este GREȘIT. Corect: \(\cos(x^2) \cdot 2x\). Oricând ai funcție compusă, derivezi și interiorul!</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>\(\int f(x) \cdot g(x)\, dx \ne \int f(x)\,dx \cdot \int g(x)\,dx\)</strong> — integrala unui produs NU se descompune! Folosești integrare prin părți sau substituție.</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>Uitarea constantei C la primitive</strong> — \(\int e^x\,dx = e^x\) este incomplet. Corect: \(e^x + C\). La integrala definită nu mai e nevoie de C.</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>Aria negativă</strong> — dacă \(f(x) < 0\) pe \([a,b]\), aria este \(\int_a^b |f(x)|\,dx\), NU \(\int_a^b f(x)\,dx\) (care dă valoare negativă).</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Greșeli la studiul funcției</div>
+        <div class="warn-block">
+          <p>❌ <strong>\(f'(x_0) = 0\) nu înseamnă automat extrem</strong> — trebuie să verifici schimbarea de semn a derivatei. Dacă \(f'\) nu schimbă semnul, este punct de inflexiune, nu extrem!</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>Confuzia concav/convex</strong> — \(f'' > 0\) înseamnă graficul este convex (∪, deschis în sus), nu concav. \(f'' < 0\) înseamnă concav (∩, deschis în jos).</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>Domeniu de definiție greșit</strong> — la funcții cu \(\sqrt{\cdot}\), \(\ln(\cdot)\), \(\frac{1}{\cdot}\) verifică mereu restricțiile înainte de orice calcul.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Greșeli la radicali și puteri</div>
+        <div class="warn-block">
+          <p>❌ <strong>\(\sqrt{a^2} = a\)</strong> — FALS dacă \(a < 0\)! Corect: \(\sqrt{a^2} = |a|\). Exemplu: \(\sqrt{(-3)^2} = \sqrt{9} = 3\), nu \(-3\).</p>
+        </div>
+        <div class="warn-block">
+          <p>❌ <strong>\(\sqrt{a+b} = \sqrt{a} + \sqrt{b}\)</strong> — FALS! Nu poți scoate radicalul dintr-o sumă. Verificare: \(\sqrt{9+16} = 5 \ne 3+4\).</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         TIPARE SUBIECTE BAC
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="tipare">
+      <div class="section-header">
+        <span class="section-number">📋</span>
+        <h2 class="section-title">Tipare subiecte BAC + structura răspunsului</h2>
+      </div>
+      <p>La BAC M2 tehnologic există 3 subiecte, fiecare cu 30 de puncte (+ 10 din oficiu = 100p). Iată ce apare frecvent și cum să structurezi răspunsul.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">Subiectul I — tipare frecvente</div>
+        <table class="math-table">
+          <thead><tr><th>Tip cerință</th><th>Ce se cere de obicei</th><th>Punctaj tipic</th></tr></thead>
+          <tbody>
+            <tr><td>Mulțimi și intervale</td><td>Operații cu intervale, apartenența unui număr</td><td>4–6p</td></tr>
+            <tr><td>Radicali / puteri</td><td>Simplificare, raționalizare, calcul cu puteri fracționare</td><td>4–6p</td></tr>
+            <tr><td>Ecuație grad 2</td><td>Rezolvare cu formula, relații Viète, natura rădăcinilor</td><td>6–8p</td></tr>
+            <tr><td>Ecuație/inecuație log sau exp</td><td>Rezolvare + verificare condiții de existență</td><td>6–8p</td></tr>
+            <tr><td>Progresii</td><td>Termenul general, suma primilor n termeni</td><td>4–6p</td></tr>
+            <tr><td>Matrice / determinanți</td><td>Calcul det, inversă, sistem Cramer</td><td>6–8p</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-block"><p>💡 La S1, rezolvă mereu toate punctele în ordine. Dacă te blochezi la un subpunct, treci mai departe și revino la final — punctele sunt independente!</p></div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Subiectul II — tipare frecvente</div>
+        <table class="math-table">
+          <thead><tr><th>Tip cerință</th><th>Structura răspunsului</th></tr></thead>
+          <tbody>
+            <tr><td>Domeniu de definiție</td><td>Enumeră toate restricțiile (numitor ≠ 0, argument log &gt; 0, radical ≥ 0) și intersectează</td></tr>
+            <tr><td>Paritate / imparitate</td><td>Calculezi f(−x), compari cu f(x) și −f(x), concluzionezi</td></tr>
+            <tr><td>Limite</td><td>Identifici forma, aplici tehnica potrivită (factorizare, raport de polinoame), calculezi</td></tr>
+            <tr><td>Continuitate într-un punct</td><td>Verifici cele 3 condiții: f(x₀) definit, limita există, limita = f(x₀)</td></tr>
+            <tr><td>Funcție trigonometrică</td><td>Valori speciale, identități, ecuație → soluție generală cu k∈ℤ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Subiectul III — tipare frecvente</div>
+        <table class="math-table">
+          <thead><tr><th>Tip cerință</th><th>Structura răspunsului</th></tr></thead>
+          <tbody>
+            <tr><td>Derivata funcției</td><td>Identifici regulile necesare (lanț, produs, câit), aplici pas cu pas, simplifici</td></tr>
+            <tr><td>Ecuația tangentei</td><td>Calculezi f(x₀) și f′(x₀), înlocuiești în \(y - f(x_0) = f'(x_0)(x-x_0)\)</td></tr>
+            <tr><td>Monotonie + extreme</td><td>f′(x) = 0 → soluții → tabel de semn → concluzie crescătoare/descrescătoare/extreme</td></tr>
+            <tr><td>Studiu complet</td><td>Urmezi cei 7 pași în ordine: Dom → paritate → intersecții → asimptote → monotonie → concavitate → grafic</td></tr>
+            <tr><td>Integrală definită</td><td>Găsești primitiva F(x), calculezi F(b) − F(a), nu uiți modulul dacă f schimbă semnul</td></tr>
+            <tr><td>Aria unei suprafețe</td><td>Găsești punctele de intersecție, stabilești care funcție e deasupra, integrezi diferența</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-block"><p>💡 La studiul complet al funcției, chiar dacă greșești calculul la un pas, comisiile acordă puncte pentru pașii corecți anteriori. Nu abandona!</p></div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Checklist înainte să predai lucrarea</div>
+        <div class="mjx-block">
+          <div class="math-row">☐ &nbsp; Am verificat condițiile de existență la logaritmi și radicali</div>
+          <div class="math-row">☐ &nbsp; Am pus \(+ C\) la toate primitivele nedefinite</div>
+          <div class="math-row">☐ &nbsp; Am verificat că aria este pozitivă (modul la integrală dacă \(f < 0\))</div>
+          <div class="math-row">☐ &nbsp; Am scris soluția generală cu \(k \in \mathbb{Z}\) la ecuații trigonometrice</div>
+          <div class="math-row">☐ &nbsp; Am verificat prin Viète rădăcinile ecuației de grad 2</div>
+          <div class="math-row">☐ &nbsp; La studiul funcției am parcurs toți cei 7 pași</div>
+          <div class="math-row">☐ &nbsp; Am scris concluzia la monotonie (crescătoare/descrescătoare pe interval)</div>
+          <div class="math-row">☐ &nbsp; Am verificat că derivata compusă include derivata funcției interioare</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         EXERCIȚII REZOLVATE DIN SUBIECTE REALE
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="exercitii">
+      <div class="section-header">
+        <span class="section-number">✏️</span>
+        <h2 class="section-title">Exerciții rezolvate — subiecte reale BAC</h2>
+      </div>
+      <p>Exerciții reprezentative din subiecte de bacalaureat, rezolvate complet pas cu pas.</p>
+
+      <div class="subsection">
+        <div class="subsection-title">S1 — Ecuație logaritmică (tip BAC)</div>
+        <div class="ex-block">
+          <div class="ex-title">Rezolvați ecuația: \({\color{#86efac}{\log}}_{\color{#fcd34d}{2}}({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{3}}{\color{#93c5fd}{x}}+{\color{#fcd34d}{2}}) = {\color{#fcd34d}{1}}\)</div>
+          <div class="ex-step"><span class="step-num">CD:</span>\( {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{3}}{\color{#93c5fd}{x}}+{\color{#fcd34d}{2}} > {\color{#fcd34d}{0}} \implies ({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}-{\color{#fcd34d}{2}}) > {\color{#fcd34d}{0}} \implies {\color{#93c5fd}{x}} \in (-\infty,{\color{#fcd34d}{1}}) \cup ({\color{#fcd34d}{2}},+\infty) \)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{3}}{\color{#93c5fd}{x}}+{\color{#fcd34d}{2}} = {\color{#fcd34d}{2}}^{{\color{#fb923c}{1}}} = {\color{#fcd34d}{2}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{3}}{\color{#93c5fd}{x}} = {\color{#fcd34d}{0}} \implies {\color{#93c5fd}{x}}({\color{#93c5fd}{x}}-{\color{#fcd34d}{3}}) = {\color{#fcd34d}{0}} \implies {\color{#93c5fd}{x}} \in \{{\color{#fcd34d}{0}}, {\color{#fcd34d}{3}}\} \)</div>
+          <div class="ex-step"><span class="step-num">3.</span>Verific CD: \({\color{#fcd34d}{0}} \in (-\infty,{\color{#fcd34d}{1}})\) ✓ &nbsp;&nbsp; \({\color{#fcd34d}{3}} \in ({\color{#fcd34d}{2}},+\infty)\) ✓</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( S = \{{\color{#fcd34d}{0}},\, {\color{#fcd34d}{3}}\} \)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">S1 — Progresie geometrică (tip BAC)</div>
+        <div class="ex-block">
+          <div class="ex-title">Primii trei termeni ai unei progresii geometrice sunt \({\color{#fcd34d}{x}}-{\color{#fcd34d}{1}},\ {\color{#fcd34d}{x}}+{\color{#fcd34d}{1}},\ {\color{#fcd34d}{x}}+{\color{#fcd34d}{9}}\). Găsiți \({\color{#93c5fd}{x}}\).</div>
+          <div class="ex-step"><span class="step-num">1.</span>Proprietatea mediei geometrice: \( ({\color{#93c5fd}{x}}+{\color{#fcd34d}{1}})^{{\color{#fb923c}{2}}} = ({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}+{\color{#fcd34d}{9}}) \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{2}}{\color{#93c5fd}{x}}+{\color{#fcd34d}{1}} = {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{8}}{\color{#93c5fd}{x}}-{\color{#fcd34d}{9}} \)</div>
+          <div class="ex-step"><span class="step-num">3.</span>\( -{\color{#fcd34d}{6}}{\color{#93c5fd}{x}} = -{\color{#fcd34d}{10}} \implies {\color{#93c5fd}{x}} = \dfrac{{\color{#fcd34d}{5}}}{{\color{#fcd34d}{3}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#93c5fd}{x}} = \dfrac{{\color{#fcd34d}{5}}}{{\color{#fcd34d}{3}}}\), termenii: \(\dfrac{{\color{#fcd34d}{2}}}{{\color{#fcd34d}{3}}},\ \dfrac{{\color{#fcd34d}{8}}}{{\color{#fcd34d}{3}}},\ \dfrac{{\color{#fcd34d}{32}}}{{\color{#fcd34d}{3}}}\), rație \({\color{#67e8f9}{q}}={\color{#fcd34d}{4}}\)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">S2 — Limite (tip BAC)</div>
+        <div class="ex-block">
+          <div class="ex-title">Calculați: \(\displaystyle{\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}} \to {\color{#fcd34d}{1}}} \dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{3}}}-{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{1}}}\)</div>
+          <div class="ex-step"><span class="step-num">obs.</span>Formă \(\frac{0}{0}\) — factorizăm</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}} \to {\color{#fcd34d}{1}}} \dfrac{({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#93c5fd}{x}}+{\color{#fcd34d}{1}})}{({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}+{\color{#fcd34d}{1}})} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}} \to {\color{#fcd34d}{1}}} \dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#93c5fd}{x}}+{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}+{\color{#fcd34d}{1}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( \dfrac{{\color{#fcd34d}{1}}+{\color{#fcd34d}{1}}+{\color{#fcd34d}{1}}}{{\color{#fcd34d}{1}}+{\color{#fcd34d}{1}}} = \dfrac{{\color{#fcd34d}{3}}}{{\color{#fcd34d}{2}}} \)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">S3 — Studiu de funcție (tip BAC)</div>
+        <div class="ex-block">
+          <div class="ex-title">Fie \({\color{#93c5fd}{f}}:{\color{#67e8f9}{\mathbb{R}}} \to {\color{#67e8f9}{\mathbb{R}}}\), \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#93c5fd}{x}}^{{\color{#fb923c}{3}}} - {\color{#fcd34d}{3}}{\color{#93c5fd}{x}} + {\color{#fcd34d}{2}}\). Determinați monotonia și extremele.</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) = {\color{#fcd34d}{3}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} - {\color{#fcd34d}{3}} = {\color{#fcd34d}{3}}({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}+{\color{#fcd34d}{1}}) \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) = {\color{#fcd34d}{0}} \implies {\color{#93c5fd}{x}}_{\color{#fcd34d}{1}} = -{\color{#fcd34d}{1}},\quad {\color{#93c5fd}{x}}_{\color{#fcd34d}{2}} = {\color{#fcd34d}{1}} \)</div>
+          <div class="ex-step"><span class="step-num">3.</span>Tabel semne: \({\color{#93c5fd}{f}}' > {\color{#fcd34d}{0}}\) pe \((-\infty,-{\color{#fcd34d}{1}})\), \({\color{#93c5fd}{f}}' < {\color{#fcd34d}{0}}\) pe \((-{\color{#fcd34d}{1}},{\color{#fcd34d}{1}})\), \({\color{#93c5fd}{f}}' > {\color{#fcd34d}{0}}\) pe \(({\color{#fcd34d}{1}},+\infty)\)</div>
+          <div class="ex-step"><span class="step-num">4.</span>\( {\color{#93c5fd}{x}} = -{\color{#fcd34d}{1}} \): maxim local \({\color{#93c5fd}{f}}(-{\color{#fcd34d}{1}}) = -{\color{#fcd34d}{1}}+{\color{#fcd34d}{3}}+{\color{#fcd34d}{2}} = {\color{#fcd34d}{4}}\)</div>
+          <div class="ex-step result-step"><span class="step-num">5.</span>\( {\color{#93c5fd}{x}} = {\color{#fcd34d}{1}} \): minim local \({\color{#93c5fd}{f}}({\color{#fcd34d}{1}}) = {\color{#fcd34d}{1}}-{\color{#fcd34d}{3}}+{\color{#fcd34d}{2}} = {\color{#fcd34d}{0}}\)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">S3 — Integrală și arie (tip BAC)</div>
+        <div class="ex-block">
+          <div class="ex-title">Calculați aria suprafeței dintre \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}\) și \({\color{#93c5fd}{g}}({\color{#93c5fd}{x}}) = {\color{#93c5fd}{x}} + {\color{#fcd34d}{2}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>Intersecții: \( {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} = {\color{#93c5fd}{x}}+{\color{#fcd34d}{2}} \implies {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#93c5fd}{x}}-{\color{#fcd34d}{2}}={\color{#fcd34d}{0}} \implies {\color{#93c5fd}{x}} \in \{-{\color{#fcd34d}{1}}, {\color{#fcd34d}{2}}\} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>Pe \([-{\color{#fcd34d}{1}},{\color{#fcd34d}{2}}]\): \({\color{#93c5fd}{g}}({\color{#93c5fd}{x}}) \ge {\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\) (linia e deasupra parabolei)</div>
+          <div class="ex-step"><span class="step-num">3.</span>\( {\color{#67e8f9}{A}} = \displaystyle{\color{#86efac}{\int}}_{-{\color{#fcd34d}{1}}}^{{\color{#fcd34d}{2}}} ({\color{#93c5fd}{x}}+{\color{#fcd34d}{2}}-{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}})\,d{\color{#93c5fd}{x}} = \left[\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}}{{\color{#fcd34d}{2}}}+{\color{#fcd34d}{2}}{\color{#93c5fd}{x}}-\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{3}}}}{{\color{#fcd34d}{3}}}\right]_{-{\color{#fcd34d}{1}}}^{{\color{#fcd34d}{2}}} \)</div>
+          <div class="ex-step"><span class="step-num">4.</span>\( = \left({\color{#fcd34d}{2}}+{\color{#fcd34d}{4}}-\dfrac{{\color{#fcd34d}{8}}}{{\color{#fcd34d}{3}}}\right) - \left(\dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}}-{\color{#fcd34d}{2}}+\dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{3}}}\right) = \dfrac{{\color{#fcd34d}{10}}}{{\color{#fcd34d}{3}}} - \left(-\dfrac{{\color{#fcd34d}{7}}}{{\color{#fcd34d}{6}}}\right) \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#67e8f9}{A}} = \dfrac{{\color{#fcd34d}{20}}}{{\color{#fcd34d}{6}}} + \dfrac{{\color{#fcd34d}{7}}}{{\color{#fcd34d}{6}}} = \dfrac{{\color{#fcd34d}{27}}}{{\color{#fcd34d}{6}}} = \dfrac{{\color{#fcd34d}{9}}}{{\color{#fcd34d}{2}}} \text{ u.a.} \)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">S3 — Derivată compusă (tip BAC)</div>
+        <div class="ex-block">
+          <div class="ex-title">Calculați \({\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})\) pentru \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{\ln}}({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}) + {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#86efac}{\sin}} {\color{#93c5fd}{x}}}}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( [{\color{#86efac}{\ln}}({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}})]' = \dfrac{({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}})'}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}} = \dfrac{{\color{#fcd34d}{2}}{\color{#93c5fd}{x}}}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( [{\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#86efac}{\sin}}{\color{#93c5fd}{x}}}}}]' = {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#86efac}{\sin}}{\color{#93c5fd}{x}}}}} \cdot ({\color{#86efac}{\sin}}{\color{#93c5fd}{x}})' = {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#86efac}{\sin}}{\color{#93c5fd}{x}}}}} \cdot {\color{#86efac}{\cos}}{\color{#93c5fd}{x}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) = \dfrac{{\color{#fcd34d}{2}}{\color{#93c5fd}{x}}}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}} + {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#86efac}{\sin}}{\color{#93c5fd}{x}}}}} \cdot {\color{#86efac}{\cos}}{\color{#93c5fd}{x}} \)</div>
+        </div>
+      </div>
+    </div>
+
     <div class="section" id="dreapta">
       <div class="section-header">
         <span class="section-number">+</span>

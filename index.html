@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematică M2 Tehnologic — Bacalaureat</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      tags: 'none'
+    },
+    svg: {
+      scale: 1.55,
+      minScale: 0.5,
+      fontCache: 'global',
+      displayAlign: 'left',
+      displayIndent: '1.2em'
+    },
+    options: {
+      skipHtmlTags: ['script','noscript','style','textarea','pre'],
+      renderActions: { addMenu: [] }
+    },
+    startup: { typeset: false }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #161b27;
+    --bg3: #1e2535;
+    --bg4: #252d3d;
+    --border: #2e3748;
+    --accent: #4f8ef7;
+    --accent2: #7c3aed;
+    --green: #22c55e;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --formula-bg: #111827;
+    --formula-border: #1e40af;
+    --example-bg: #0f2818;
+    --example-border: #166534;
+    --tip-bg: #1c1206;
+    --tip-border: #92400e;
+    --sidebar-w: 280px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #sidebar-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  #sidebar-scroll::-webkit-scrollbar { width: 4px; }
+  #sidebar-scroll::-webkit-scrollbar-track { background: var(--bg2); }
+  #sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .sidebar-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .sidebar-subtitle {
+    font-size: 11px;
+    color: var(--text3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .sidebar-search {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .sidebar-search input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px;
+    color: var(--text);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .sidebar-search input:focus { border-color: var(--accent); }
+  .sidebar-search input::placeholder { color: var(--text3); }
+
+  .sidebar-nav { padding: 12px 0 24px; }
+
+  .nav-subject {
+    padding: 4px 0;
+  }
+
+  .nav-subject-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text3);
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .nav-subject-title:hover { color: var(--text2); }
+
+  .nav-subject-title .arrow {
+    margin-left: auto;
+    transition: transform 0.2s;
+    font-size: 10px;
+  }
+
+  .nav-subject.open .arrow { transform: rotate(90deg); }
+
+  .nav-subject-badge {
+    background: var(--bg3);
+    color: var(--text3);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-items {
+    display: none;
+    padding-left: 8px;
+  }
+
+  .nav-subject.open .nav-items { display: block; }
+
+  .nav-item {
+    display: block;
+    padding: 6px 16px 6px 24px;
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .nav-item:hover {
+    color: var(--text);
+    border-left-color: var(--accent);
+    background: rgba(79, 142, 247, 0.05);
+  }
+
+  .nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(79, 142, 247, 0.08);
+  }
+
+  /* ── MAIN ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    max-width: calc(100% - var(--sidebar-w));
+  }
+
+  .top-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .breadcrumb span { color: var(--text2); }
+
+  .top-bar-right {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+
+  .badge {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+  }
+
+  .badge-blue { background: rgba(79,142,247,0.15); color: var(--accent); border: 1px solid rgba(79,142,247,0.3); }
+  .badge-green { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+  .content {
+    padding: 48px 52px;
+    max-width: 960px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 80px;
+    scroll-margin-top: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .subsection {
+    margin-bottom: 44px;
+    scroll-margin-top: 60px;
+  }
+
+  .subsection-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .subsection-title::before {
+    content: '';
+    width: 3px;
+    height: 16px;
+    background: var(--cyan);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  p { color: var(--text2); margin-bottom: 16px; line-height: 1.9; }
+
+  /* MathJax SVG container */
+  mjx-container {
+    display: inline-block !important;
+    vertical-align: middle;
+  }
+
+  mjx-container[display="true"] {
+    display: block !important;
+    margin: 6px 0;
+  }
+
+  /* SVG: \color{} din LaTeX scrie direct fill pe path-uri — funcționează nativ */
+  mjx-container svg {
+    overflow: visible;
+  }
+
+  /* ══════════════════════════════════════
+     FORMULA BLOCKS — MathJax CHTML cu culori
+  ══════════════════════════════════════ */
+  .mjx-block {
+    background: #141a28;
+    border: 1px solid #2a3550;
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 28px 36px 22px;
+    margin: 20px 0;
+    position: relative;
+    overflow-x: auto;
+    color: #e2e8f0;
+  }
+
+  .mjx-block::before {
+    content: 'FORMULĂ';
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    opacity: 0.5;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .mjx-block .math-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 14px 0 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    min-height: 58px;
+    line-height: 1;
+  }
+
+  .mjx-block .math-row:last-child {
+    border-bottom: none;
+    padding-bottom: 8px;
+  }
+
+  /* Comentariile de lângă formule */
+  .mjx-block .math-row .math-comment {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #5a7099;
+    margin-left: 14px;
+    flex-shrink: 0;
+  }
+
+  .mjx-block .math-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #4a6080;
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 600;
+  }
+
+  /* ── EXAMPLE BLOCKS ── */
+  .ex-block {
+    background: #0d1f12;
+    border: 1px solid #1a3a22;
+    border-left: 3px solid var(--green);
+    border-radius: 10px;
+    padding: 22px 32px;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  .ex-block::before {
+    content: 'EXEMPLU';
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    opacity: 0.6;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .ex-block .ex-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4ade80;
+    margin-bottom: 16px;
+  }
+
+  .ex-block {
+    color: #86efac;
+  }
+
+  .ex-block .ex-step.result-step {
+    color: #4ade80;
+  }
+
+  .ex-block .ex-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(34,197,94,0.08);
+    flex-wrap: wrap;
+    min-height: 58px;
+  }
+
+  .ex-block .ex-step:last-child { border-bottom: none; }
+
+  .ex-block .ex-step .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #2d5a3a;
+    min-width: 18px;
+    flex-shrink: 0;
+  }
+
+  .ex-block .ex-step .step-note {
+    font-size: 11.5px;
+    color: #4a6050;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .formula-block {
+    background: var(--formula-bg);
+    border: 1px solid var(--formula-border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    font-family: 'JetBrains Mono', monospace;
+    position: relative;
+    overflow-x: auto;
+  }
+
+  .formula-block::before {
+    content: 'FORMULĂ';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    opacity: 0.6;
+    font-weight: 700;
+  }
+
+  .formula-block .formula-line {
+    display: block;
+    color: #93c5fd;
+    font-size: 14px;
+    padding: 3px 0;
+    line-height: 1.8;
+  }
+
+  .formula-block .formula-line .var { color: #f9a8d4; }
+  .formula-block .formula-line .op { color: #86efac; }
+  .formula-block .formula-line .num { color: #fcd34d; }
+  .formula-block .formula-line .comment {
+    color: var(--text3);
+    font-size: 12px;
+    margin-left: 12px;
+  }
+
+  /* Inline math */
+  .math {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(79,142,247,0.12);
+    border: 1px solid rgba(79,142,247,0.2);
+    color: #93c5fd;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── EXAMPLE BLOCKS ── */
+  .example-block {
+    background: var(--example-bg);
+    border: 1px solid var(--example-border);
+    border-left: 3px solid var(--green);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    position: relative;
+  }
+
+  .example-block::before {
+    content: 'EXEMPLU';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    opacity: 0.7;
+    font-weight: 700;
+  }
+
+  .example-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .example-block .step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #86efac;
+    display: block;
+    padding: 3px 0;
+    line-height: 1.9;
+  }
+
+  .example-block .step .dim { color: var(--text3); font-size: 12px; }
+  .example-block .step .result { color: #4ade80; font-weight: 700; }
+  .example-block .step .highlight { color: #fde68a; }
+
+  /* ── TIP BLOCKS ── */
+  .tip-block {
+    background: var(--tip-bg);
+    border: 1px solid var(--tip-border);
+    border-left: 3px solid var(--yellow);
+    border-radius: 8px;
+    padding: 18px 26px;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  .tip-block::before {
+    content: '💡 TIP';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+    opacity: 0.8;
+    font-weight: 700;
+  }
+
+  .tip-block p { color: #fde68a; font-size: 14px; margin-bottom: 0; line-height: 1.7; }
+
+  /* ── WARNING BLOCKS ── */
+  .warn-block {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    padding: 18px 26px;
+    margin: 20px 0;
+  }
+
+  .warn-block p { color: #fca5a5; font-size: 14px; margin-bottom: 0; line-height: 1.7; }
+
+  /* ── TABLE ── */
+  .math-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  .math-table th {
+    background: var(--bg3);
+    color: var(--accent);
+    padding: 13px 18px;
+    text-align: left;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .math-table td {
+    padding: 12px 18px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .math-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .math-table td:first-child { color: #93c5fd; }
+
+  /* ── GRID ── */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  .formula-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .formula-card-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .formula-card-content {
+    font-family: 'JetBrains Mono', monospace;
+    color: #93c5fd;
+    font-size: 14px;
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1420 0%, #1a1035 50%, #0d1420 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(79,142,247,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #e2e8f0 30%, #93c5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    color: var(--text3);
+    font-size: 14px;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  .legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── MOBILE TOGGLE ── */
+  #menu-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(79,142,247,0.4);
+  }
+
+  /* scrollbar main */
+  #main::-webkit-scrollbar { width: 4px; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* superscript / subscript styling */
+  sup, sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #fcd34d;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0px; }
+    #sidebar { transform: translateX(-280px); width: 280px; transition: transform 0.3s; }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; max-width: 100%; }
+    #menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .content { padding: 24px 20px; }
+    .hero { padding: 28px 20px; }
+    .formula-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+    .top-bar { padding: 12px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Matematică M2</div>
+    <div class="sidebar-subtitle">// bac · tehnologic · cheatsheet</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="search-input" placeholder="Caută capitol..." />
+  </div>
+  <div id="sidebar-scroll">
+  <div class="sidebar-nav" id="nav-container">
+
+    <div class="nav-subject open" data-subject="s1">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">S1</span> Subiectul I
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#reale">Mulțimea numerelor reale</a>
+        <a class="nav-item" href="#radicali">Radicali</a>
+        <a class="nav-item" href="#modul">Modulul unui număr real</a>
+        <a class="nav-item" href="#puteri">Puteri cu exponent real</a>
+        <a class="nav-item" href="#logaritmi">Logaritmi</a>
+        <a class="nav-item" href="#ecuatii">Ecuații și inecuații</a>
+        <a class="nav-item" href="#sisteme">Sisteme de ecuații</a>
+      </div>
+    </div>
+
+    <div class="nav-subject open" data-subject="s2">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">S2</span> Subiectul II
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#functii">Noțiuni despre funcții</a>
+        <a class="nav-item" href="#functii-elem">Funcții elementare</a>
+        <a class="nav-item" href="#trig">Funcții trigonometrice</a>
+        <a class="nav-item" href="#exp-log-fn">Funcții exp. și log.</a>
+        <a class="nav-item" href="#limite">Limite de funcții</a>
+        <a class="nav-item" href="#continuitate">Continuitate</a>
+      </div>
+    </div>
+
+    <div class="nav-subject open" data-subject="s3">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">S3</span> Subiectul III
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#derivate">Derivata unei funcții</a>
+        <a class="nav-item" href="#reguli-deriv">Reguli de derivare</a>
+        <a class="nav-item" href="#monotonie">Monotonie și extreme</a>
+        <a class="nav-item" href="#concavitate">Concavitate și inflexiune</a>
+        <a class="nav-item" href="#asimptote">Asimptote</a>
+        <a class="nav-item" href="#grafice">Studiul funcțiilor</a>
+        <a class="nav-item" href="#integrale">Integrale</a>
+        <a class="nav-item" href="#prim">Primitive</a>
+      </div>
+    </div>
+
+    <div class="nav-subject" data-subject="s4">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">+</span> Algebră Liniară
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#matrice">Matrice</a>
+        <a class="nav-item" href="#determinanti">Determinanți</a>
+        <a class="nav-item" href="#sisteme-mat">Sisteme liniare (Cramer)</a>
+      </div>
+    </div>
+
+    <div class="nav-subject" data-subject="s5">
+      <div class="nav-subject-title" onclick="toggleSubject(this)">
+        <span class="nav-subject-badge">+</span> Geometrie
+        <span class="arrow">▶</span>
+      </div>
+      <div class="nav-items">
+        <a class="nav-item" href="#vectori">Vectori</a>
+        <a class="nav-item" href="#geometrie-an">Geometrie analitică</a>
+        <a class="nav-item" href="#dreapta">Dreapta în plan</a>
+      </div>
+    </div>
+
+  </div><!-- end sidebar-nav -->
+  </div><!-- end sidebar-scroll -->
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="top-bar">
+    <div class="breadcrumb">matematica <span>/</span> m2-tehnologic <span>/</span> bacalaureat</div>
+    <div class="top-bar-right">
+      <span class="badge badge-blue">M2 Tehnologic</span>
+      <span class="badge badge-green">Bac 2025</span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-tag">Matematică · Bacalaureat</div>
+    <h1>M2 Tehnologic<br>Cheatsheet complet</h1>
+    <p class="hero-desc">Toate formulele, proprietățile și exemplele necesare pentru bacalaureat, organizate pe subiecte. Fiecare formulă este explicată și exemplificată.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-val">3</span>
+        <span class="hero-stat-label">Subiecte BAC</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">15+</span>
+        <span class="hero-stat-label">Capitole</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">100+</span>
+        <span class="hero-stat-label">Formule</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">50+</span>
+        <span class="hero-stat-label">Exemple rezolvate</span>
+      </div>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#93c5fd"></span>variabile</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#fcd34d"></span>numere / constante</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#86efac"></span>funcții / radicali</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#fb923c"></span>exponenți / puteri</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#f0abfc"></span>operatori / rezultate</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#67e8f9"></span>mulțimi / notații</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ════════════════════════════════════════
+         SUBIECTUL I — ALGEBRĂ
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="reale">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Mulțimea numerelor reale</h2>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Submulțimi ale lui ℝ</div>
+        <p>Numerele reale includ toate tipurile de numere: naturale, întregi, raționale și iraționale.</p>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#67e8f9}{\mathbb{N}}} {\color{#f0abfc}{\subset}} {\color{#67e8f9}{\mathbb{Z}}} {\color{#f0abfc}{\subset}} {\color{#67e8f9}{\mathbb{Q}}} {\color{#f0abfc}{\subset}} {\color{#67e8f9}{\mathbb{R}}} \) <span class="math-comment">// incluziuni de mulțimi</span></div>
+          <div class="math-row">\( {\color{#67e8f9}{\mathbb{R}}} {\color{#f0abfc}{=}} {\color{#67e8f9}{\mathbb{Q}}} {\color{#f0abfc}{\cup}} {\color{#67e8f9}{\mathbb{Q}'}} \) <span class="math-comment">// raționale ∪ iraționale</span></div>
+        </div>
+        <table class="math-table">
+          <thead><tr><th>Mulțime</th><th>Simbol</th><th>Exemple</th></tr></thead>
+          <tbody>
+            <tr><td>Naturale</td><td>\({\color{#67e8f9}{\mathbb{N}}}\)</td><td>0, 1, 2, 3, …</td></tr>
+            <tr><td>Întregi</td><td>\({\color{#67e8f9}{\mathbb{Z}}}\)</td><td>…, −2, −1, 0, 1, 2, …</td></tr>
+            <tr><td>Raționale</td><td>\({\color{#67e8f9}{\mathbb{Q}}}\)</td><td>\(\tfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}},\ \tfrac{{\color{#fcd34d}{3}}}{{\color{#fcd34d}{4}}},\ {\color{#fcd34d}{0{,}25}}\)</td></tr>
+            <tr><td>Iraționale</td><td>\({\color{#67e8f9}{\mathbb{Q}'}}\)</td><td>\({\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}},\ {\color{#fcd34d}{\pi}},\ {\color{#fcd34d}{e}},\ {\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}\)</td></tr>
+            <tr><td>Reale</td><td>\({\color{#67e8f9}{\mathbb{R}}}\)</td><td>toate de mai sus</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Intervale de numere reale</div>
+        <table class="math-table">
+          <thead><tr><th>Notație</th><th>Descriere</th><th>Condiție</th></tr></thead>
+          <tbody>
+            <tr><td>\(({\color{#93c5fd}{a}},{\color{#93c5fd}{b}})\)</td><td>interval deschis</td><td>\({\color{#93c5fd}{a}} < {\color{#93c5fd}{x}} < {\color{#93c5fd}{b}}\)</td></tr>
+            <tr><td>\([{\color{#93c5fd}{a}},{\color{#93c5fd}{b}}]\)</td><td>interval închis</td><td>\({\color{#93c5fd}{a}} \le {\color{#93c5fd}{x}} \le {\color{#93c5fd}{b}}\)</td></tr>
+            <tr><td>\([{\color{#93c5fd}{a}},{\color{#93c5fd}{b}})\)</td><td>semideschis stânga</td><td>\({\color{#93c5fd}{a}} \le {\color{#93c5fd}{x}} < {\color{#93c5fd}{b}}\)</td></tr>
+            <tr><td>\(({\color{#93c5fd}{a}},{\color{#93c5fd}{b}}]\)</td><td>semideschis dreapta</td><td>\({\color{#93c5fd}{a}} < {\color{#93c5fd}{x}} \le {\color{#93c5fd}{b}}\)</td></tr>
+            <tr><td>\(({\color{#93c5fd}{a}},+\infty)\)</td><td>semiaxă dreaptă</td><td>\({\color{#93c5fd}{x}} > {\color{#93c5fd}{a}}\)</td></tr>
+            <tr><td>\((-\infty,{\color{#93c5fd}{b}}]\)</td><td>semiaxă stângă</td><td>\({\color{#93c5fd}{x}} \le {\color{#93c5fd}{b}}\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RADICALI -->
+    <div class="section" id="radicali">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Radicali</h2>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Definiție și proprietăți de bază</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\sqrt[{{\color{#93c5fd}{n}}}]{{\color{#93c5fd}{a}}}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{b}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{b}}^{{\color{#fb923c}{n}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}} \) <span class="math-comment">// definiție radical de ordin n</span></div>
+          <div class="math-row">\( {\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}^{{\color{#fb923c}{2}}}}}} {\color{#f0abfc}{=}} {\color{#86efac}{|}}{\color{#93c5fd}{a}}{\color{#86efac}{|}} \) <span class="math-comment">// atenție la valoarea absolută!</span></div>
+          <div class="math-row">\( {\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}} {\color{#f0abfc}{\cdot}} {\color{#86efac}{\sqrt{{\color{#93c5fd}{b}}}}} {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt{{\color{#93c5fd}{a}} \cdot {\color{#93c5fd}{b}}}}} \quad ({\color{#93c5fd}{a}} \ge {\color{#fcd34d}{0}},\, {\color{#93c5fd}{b}} \ge {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( \dfrac{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}}{{\color{#86efac}{\sqrt{{\color{#93c5fd}{b}}}}}} {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt{\dfrac{{\color{#93c5fd}{a}}}{{\color{#93c5fd}{b}}}}}} \quad ({\color{#93c5fd}{a}} \ge {\color{#fcd34d}{0}},\, {\color{#93c5fd}{b}} > {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{\sqrt[{{\color{#93c5fd}{n}}}]{{\color{#93c5fd}{a}}}}} {\color{#f0abfc}{\cdot}} {\color{#86efac}{\sqrt[{{\color{#93c5fd}{n}}}]{{\color{#93c5fd}{b}}}}} {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt[{{\color{#93c5fd}{n}}}]{{\color{#93c5fd}{a}} \cdot {\color{#93c5fd}{b}}}}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\sqrt[{{\color{#93c5fd}{n}}}]{{\color{#93c5fd}{a}}^{{\color{#fb923c}{m}}}}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{m/n}}} \) <span class="math-comment">// legătura cu puterile fracționare</span></div>
+          <div class="math-row">\( {\color{#86efac}{\sqrt[{{\color{#93c5fd}{m}}}]{{\color{#86efac}{\sqrt[{{\color{#93c5fd}{n}}}]{{\color{#93c5fd}{a}}}}}}}} {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt[{{\color{#93c5fd}{mn}}}]{{\color{#93c5fd}{a}}}}} \) <span class="math-comment">// radical din radical</span></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Raționalizarea numitorului</div>
+        <p>Se înmulțește numărătorul și numitorul cu <strong>conjugatul</strong> numitorului.</p>
+        <div class="mjx-block">
+          <div class="math-row">\( \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}} {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}}{{\color{#93c5fd}{a}}} \) <span class="math-comment">// înmulțim cu \(\frac{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}}{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}}\)</span></div>
+          <div class="math-row">\( \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}+{\color{#86efac}{\sqrt{{\color{#93c5fd}{b}}}}}} {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}-{\color{#86efac}{\sqrt{{\color{#93c5fd}{b}}}}}}{{\color{#93c5fd}{a}}-{\color{#93c5fd}{b}}} \)</div>
+          <div class="math-row">\( \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}-{\color{#86efac}{\sqrt{{\color{#93c5fd}{b}}}}}} {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}}}}+{\color{#86efac}{\sqrt{{\color{#93c5fd}{b}}}}}}{{\color{#93c5fd}{a}}-{\color{#93c5fd}{b}}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: Raționalizare</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( \dfrac{{\color{#fcd34d}{3}}}{{\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}}+{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( = \dfrac{{\color{#fcd34d}{3}}({\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}}-{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}})}{({\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}}+{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}})({\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}}-{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}})} = \dfrac{{\color{#fcd34d}{3}}({\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}}-{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}})}{{\color{#fcd34d}{5}}-{\color{#fcd34d}{2}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#86efac}{\sqrt{{\color{#fcd34d}{5}}}}}-{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}} \)</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Simplificarea radicalilor</div>
+        <div class="ex-block">
+          <div class="ex-title">Exemple rezolvate</div>
+          <div class="ex-step"><span class="step-num">•</span>\( {\color{#86efac}{\sqrt{{\color{#fcd34d}{75}}}}} = {\color{#86efac}{\sqrt{{\color{#fcd34d}{25}} \cdot {\color{#fcd34d}{3}}}}} = {\color{#fcd34d}{5}}{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}} \)</div>
+          <div class="ex-step"><span class="step-num">•</span>\( {\color{#86efac}{\sqrt{{\color{#fcd34d}{48}}}}} = {\color{#86efac}{\sqrt{{\color{#fcd34d}{16}} \cdot {\color{#fcd34d}{3}}}}} = {\color{#fcd34d}{4}}{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}} \)</div>
+          <div class="ex-step"><span class="step-num">•</span>\( {\color{#86efac}{\sqrt[{{\color{#fcd34d}{3}}}]{{\color{#fcd34d}{54}}}}} = {\color{#86efac}{\sqrt[{{\color{#fcd34d}{3}}}]{{\color{#fcd34d}{27}} \cdot {\color{#fcd34d}{2}}}}} = {\color{#fcd34d}{3}}{\color{#86efac}{\sqrt[{{\color{#fcd34d}{3}}}]{{\color{#fcd34d}{2}}}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">•</span>\( {\color{#86efac}{\sqrt{{\color{#fcd34d}{12}}}}}+{\color{#86efac}{\sqrt{{\color{#fcd34d}{27}}}}}-{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}} = {\color{#fcd34d}{2}}{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}+{\color{#fcd34d}{3}}{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}-{\color{#fcd34d}{1}}{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}} = {\color{#fcd34d}{4}}{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}} \)</div>
+        </div>
+        <div class="tip-block"><p>Scoate factori la pătrat sub radical: caută cel mai mare pătrat perfect care divide numărul (4, 9, 16, 25, 36, 49, …).</p></div>
+      </div>
+    </div>
+
+    <!-- MODUL -->
+    <div class="section" id="modul">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Modulul unui număr real</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Definiție și proprietăți</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{a}}{\color{#86efac}{|}} {\color{#f0abfc}{=}} \begin{cases} {\color{#93c5fd}{a}} & \text{dacă } {\color{#93c5fd}{a}} \ge {\color{#fcd34d}{0}} \\ {\color{#f0abfc}{-}}{\color{#93c5fd}{a}} & \text{dacă } {\color{#93c5fd}{a}} < {\color{#fcd34d}{0}} \end{cases} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{a}}{\color{#86efac}{|}} \ge {\color{#fcd34d}{0}} \) <span class="math-comment">// modulul este mereu pozitiv</span></div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{a}} \cdot {\color{#93c5fd}{b}}{\color{#86efac}{|}} {\color{#f0abfc}{=}} {\color{#86efac}{|}}{\color{#93c5fd}{a}}{\color{#86efac}{|}} \cdot {\color{#86efac}{|}}{\color{#93c5fd}{b}}{\color{#86efac}{|}} \)</div>
+          <div class="math-row">\( \left\lvert\dfrac{{\color{#93c5fd}{a}}}{{\color{#93c5fd}{b}}}\right\rvert {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{|}}{\color{#93c5fd}{a}}{\color{#86efac}{|}}}{{\color{#86efac}{|}}{\color{#93c5fd}{b}}{\color{#86efac}{|}}} \quad ({\color{#93c5fd}{b}} \ne {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{a}}+{\color{#93c5fd}{b}}{\color{#86efac}{|}} \le {\color{#86efac}{|}}{\color{#93c5fd}{a}}{\color{#86efac}{|}}+{\color{#86efac}{|}}{\color{#93c5fd}{b}}{\color{#86efac}{|}} \) <span class="math-comment">// inegalitatea triunghiului</span></div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Ecuații și inecuații cu modul</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{x}}{\color{#86efac}{|}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}} \text{ sau } {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#f0abfc}{-}}{\color{#93c5fd}{a}} \quad ({\color{#93c5fd}{a}} > {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{x}}{\color{#86efac}{|}} < {\color{#93c5fd}{a}} {\color{#f0abfc}{\iff}} {\color{#f0abfc}{-}}{\color{#93c5fd}{a}} < {\color{#93c5fd}{x}} < {\color{#93c5fd}{a}} \quad ({\color{#93c5fd}{a}} > {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{x}}{\color{#86efac}{|}} > {\color{#93c5fd}{a}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{x}} < {\color{#f0abfc}{-}}{\color{#93c5fd}{a}} \text{ sau } {\color{#93c5fd}{x}} > {\color{#93c5fd}{a}} \quad ({\color{#93c5fd}{a}} > {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{x}}{\color{#86efac}{|}} \le {\color{#93c5fd}{a}} {\color{#f0abfc}{\iff}} {\color{#f0abfc}{-}}{\color{#93c5fd}{a}} \le {\color{#93c5fd}{x}} \le {\color{#93c5fd}{a}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{|}}{\color{#93c5fd}{x}}{\color{#86efac}{|}} \ge {\color{#93c5fd}{a}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{x}} \le {\color{#f0abfc}{-}}{\color{#93c5fd}{a}} \text{ sau } {\color{#93c5fd}{x}} \ge {\color{#93c5fd}{a}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#86efac}{|}}{\color{#fcd34d}{2}}{\color{#93c5fd}{x}}-{\color{#fcd34d}{3}}{\color{#86efac}{|}} < {\color{#fcd34d}{5}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#f0abfc}{-}}{\color{#fcd34d}{5}} < {\color{#fcd34d}{2}}{\color{#93c5fd}{x}}-{\color{#fcd34d}{3}} < {\color{#fcd34d}{5}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#f0abfc}{-}}{\color{#fcd34d}{2}} < {\color{#fcd34d}{2}}{\color{#93c5fd}{x}} < {\color{#fcd34d}{8}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#f0abfc}{-}}{\color{#fcd34d}{1}} < {\color{#93c5fd}{x}} < {\color{#fcd34d}{4}} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{x}} \in ({\color{#f0abfc}{-}}{\color{#fcd34d}{1}},\,{\color{#fcd34d}{4}}) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUTERI -->
+    <div class="section" id="puteri">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Puteri cu exponent real</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Reguli de calcul cu puteri</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{m}}} \cdot {\color{#93c5fd}{a}}^{{\color{#fb923c}{n}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{m+n}}} \) <span class="math-comment">// produs cu aceeași bază</span></div>
+          <div class="math-row">\( \dfrac{{\color{#93c5fd}{a}}^{{\color{#fb923c}{m}}}}{{\color{#93c5fd}{a}}^{{\color{#fb923c}{n}}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{m-n}}} \) <span class="math-comment">// câit cu aceeași bază</span></div>
+          <div class="math-row">\( ({\color{#93c5fd}{a}}^{{\color{#fb923c}{m}}})^{{\color{#fb923c}{n}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{m \cdot n}}} \) <span class="math-comment">// putere la putere</span></div>
+          <div class="math-row">\( ({\color{#93c5fd}{a}} \cdot {\color{#93c5fd}{b}})^{{\color{#fb923c}{n}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{n}}} \cdot {\color{#93c5fd}{b}}^{{\color{#fb923c}{n}}} \)</div>
+          <div class="math-row">\( \left(\dfrac{{\color{#93c5fd}{a}}}{{\color{#93c5fd}{b}}}\right)^{{\color{#fb923c}{n}}} {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{a}}^{{\color{#fb923c}{n}}}}{{\color{#93c5fd}{b}}^{{\color{#fb923c}{n}}}} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{-n}}} {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{a}}^{{\color{#fb923c}{n}}}} \) <span class="math-comment">// exponent negativ</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{0}}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \quad ({\color{#93c5fd}{a}} \ne {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{m/n}}} {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt[{{\color{#fb923c}{n}}}]{{\color{#93c5fd}{a}}^{{\color{#fb923c}{m}}}}}} \) <span class="math-comment">// exponent fracționar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGARITMI -->
+    <div class="section" id="logaritmi">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Logaritmi</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Definiție și proprietăți fundamentale</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{b}} {\color{#f0abfc}{=}} {\color{#93c5fd}{c}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{c}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{b}} \quad ({\color{#93c5fd}{a}}>0,\, {\color{#93c5fd}{a}} \ne 1,\, {\color{#93c5fd}{b}}>0) \)</div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{a}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \qquad {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#fcd34d}{1}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{{\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{b}}}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{b}} \) <span class="math-comment">// proprietate fundamentală</span></div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}}({\color{#93c5fd}{x}} \cdot {\color{#93c5fd}{y}}) {\color{#f0abfc}{=}} {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{x}} + {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{y}} \) <span class="math-comment">// log produs</span></div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}}\!\left(\dfrac{{\color{#93c5fd}{x}}}{{\color{#93c5fd}{y}}}\right) {\color{#f0abfc}{=}} {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{x}} - {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{y}} \) <span class="math-comment">// log câit</span></div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{x}}^{{\color{#fb923c}{n}}} {\color{#f0abfc}{=}} {\color{#fb923c}{n}} \cdot {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{x}} \) <span class="math-comment">// log putere</span></div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{b}} {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\log}}_{{\color{#93c5fd}{c}}} {\color{#93c5fd}{b}}}{{\color{#86efac}{\log}}_{{\color{#93c5fd}{c}}} {\color{#93c5fd}{a}}} \) <span class="math-comment">// schimbare bază</span></div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{b}} {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\log}}_{{\color{#93c5fd}{b}}} {\color{#93c5fd}{a}}} \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Logaritm zecimal și natural</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\lg}}\, {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\log}}_{{\color{#fcd34d}{10}}} {\color{#93c5fd}{x}} \) <span class="math-comment">// logaritm zecimal</span></div>
+          <div class="math-row">\( {\color{#86efac}{\ln}}\, {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\log}}_{{\color{#fcd34d}{e}}} {\color{#93c5fd}{x}} \quad ({\color{#fcd34d}{e}} \approx {\color{#fcd34d}{2{,}718\ldots}}) \) <span class="math-comment">// logaritm natural</span></div>
+          <div class="math-row">\( {\color{#86efac}{\ln}}\, {\color{#fcd34d}{e}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \qquad {\color{#86efac}{\lg}}\, {\color{#fcd34d}{10}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\ln}}\, {\color{#fcd34d}{e}}^{{\color{#fb923c}{x}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{x}} \qquad {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#86efac}{\ln}}\, {\color{#93c5fd}{x}}}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{x}} \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Ecuații logaritmice</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{f(x)}} {\color{#f0abfc}{=}} {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{g(x)}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{f(x)}} {\color{#f0abfc}{=}} {\color{#93c5fd}{g(x)}} \) <span class="math-comment">// + condiții f,g&gt;0</span></div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{f(x)}} {\color{#f0abfc}{=}} {\color{#fb923c}{n}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{f(x)}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{n}}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#86efac}{\log}}_{{\color{#fcd34d}{2}}}({\color{#93c5fd}{x}}+{\color{#fcd34d}{1}})+{\color{#86efac}{\log}}_{{\color{#fcd34d}{2}}}({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})={\color{#fcd34d}{3}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#86efac}{\log}}_{{\color{#fcd34d}{2}}}\bigl[({\color{#93c5fd}{x}}+{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})\bigr] = {\color{#fcd34d}{3}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{1}} = {\color{#fcd34d}{2}}^{{\color{#fb923c}{3}}} = {\color{#fcd34d}{8}} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} = {\color{#fcd34d}{9}} \)</div>
+          <div class="ex-step"><span class="step-num">3.</span><span class="step-note">Condiții: x+1 &gt; 0 și x−1 &gt; 0 ⟹ x &gt; 1</span></div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#93c5fd}{x}} = {\color{#fcd34d}{3}} \quad \text{(x=−3 se respinge)} \)</div>
+        </div>
+        <div class="tip-block"><p>La ecuații logaritmice verifică MEREU condițiile de existență: argumentele trebuie să fie strict pozitive!</p></div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Inecuații logaritmice</div>
+        <div class="mjx-block">
+          <div class="math-label">dacă a &gt; 1 (funcție crescătoare):</div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{f(x)}} < {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{g(x)}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{f(x)}} < {\color{#93c5fd}{g(x)}} \)</div>
+          <div class="math-label" style="margin-top:8px">dacă 0 &lt; a &lt; 1 (funcție descrescătoare):</div>
+          <div class="math-row">\( {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{f(x)}} < {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{g(x)}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{f(x)}} > {\color{#93c5fd}{g(x)}} \) <span class="math-comment">// sensul se INVERSEAZĂ!</span></div>
+        </div>
+        <div class="warn-block"><p>⚠️ La inecuații logaritmice cu 0 &lt; a &lt; 1, sensul inegalității se INVERSEAZĂ!</p></div>
+      </div>
+    </div>
+
+    <!-- ECUATII -->
+    <div class="section" id="ecuatii">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Ecuații și inecuații</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Ecuația de gradul 1</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{a}}{\color{#93c5fd}{x}} + {\color{#93c5fd}{b}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} -\dfrac{{\color{#93c5fd}{b}}}{{\color{#93c5fd}{a}}} \quad ({\color{#93c5fd}{a}} \ne {\color{#fcd34d}{0}}) \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Ecuația de gradul 2</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{a}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} + {\color{#93c5fd}{b}}{\color{#93c5fd}{x}} + {\color{#93c5fd}{c}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \quad ({\color{#93c5fd}{a}} \ne {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} {\color{#f0abfc}{=}} {\color{#93c5fd}{b}}^{{\color{#fb923c}{2}}} - {\color{#fcd34d}{4}}{\color{#93c5fd}{a}}{\color{#93c5fd}{c}} \) <span class="math-comment">// discriminantul</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{x}}_{1,2} {\color{#f0abfc}{=}} \dfrac{-{\color{#93c5fd}{b}} \pm {\color{#86efac}{\sqrt{{\color{#67e8f9}{\Delta}}}}}}{{\color{#fcd34d}{2}}{\color{#93c5fd}{a}}} \) <span class="math-comment">// formula fundamentală</span></div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Cazuri după semnul lui Δ:</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} > {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{2 soluții reale distincte} \)</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{=}} -\dfrac{{\color{#93c5fd}{b}}}{{\color{#fcd34d}{2}}{\color{#93c5fd}{a}}} \) <span class="math-comment">// soluție dublă</span></div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} < {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{nu există soluții reale} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Relațiile lui Viète:</div>
+          <div class="math-row">\( {\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}} + {\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{=}} -\dfrac{{\color{#93c5fd}{b}}}{{\color{#93c5fd}{a}}} \) <span class="math-comment">// suma rădăcinilor</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}} \cdot {\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{c}}}{{\color{#93c5fd}{a}}} \) <span class="math-comment">// produsul rădăcinilor</span></div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#fcd34d}{2}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} - {\color{#fcd34d}{5}}{\color{#93c5fd}{x}} + {\color{#fcd34d}{3}} = {\color{#fcd34d}{0}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#67e8f9}{\Delta}} = ({\color{#f0abfc}{-}}{\color{#fcd34d}{5}})^{{\color{#fb923c}{2}}} - {\color{#fcd34d}{4}} \cdot {\color{#fcd34d}{2}} \cdot {\color{#fcd34d}{3}} = {\color{#fcd34d}{25}} - {\color{#fcd34d}{24}} = {\color{#fcd34d}{1}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}} = \dfrac{{\color{#fcd34d}{5}}+{\color{#fcd34d}{1}}}{{\color{#fcd34d}{4}}} = \dfrac{{\color{#fcd34d}{3}}}{{\color{#fcd34d}{2}}}, \quad {\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}} = \dfrac{{\color{#fcd34d}{5}}-{\color{#fcd34d}{1}}}{{\color{#fcd34d}{4}}} = {\color{#fcd34d}{1}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">✓</span>\( {\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}}+{\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}} = \tfrac{{\color{#fcd34d}{5}}}{{\color{#fcd34d}{2}}} \checkmark \quad {\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}} \cdot {\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}} = \tfrac{{\color{#fcd34d}{3}}}{{\color{#fcd34d}{2}}} \checkmark \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Ecuații exponențiale</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{x}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{y}}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#93c5fd}{y}} \quad ({\color{#93c5fd}{a}}>{\color{#fcd34d}{0}},\, {\color{#93c5fd}{a}} \ne {\color{#fcd34d}{1}}) \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}^{{\color{#fb923c}{f(x)}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{b}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{f(x)}} {\color{#f0abfc}{=}} {\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{b}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#fcd34d}{4}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}} = {\color{#fcd34d}{2}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}+{\color{#fcd34d}{3}}}}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#fcd34d}{2}}^{{\color{#fb923c}{2{\color{#93c5fd}{x}}}}} = {\color{#fcd34d}{2}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}+{\color{#fcd34d}{3}}}}} \) <span class="step-note">// 4 = 2²</span></div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#fcd34d}{2}}{\color{#93c5fd}{x}} = {\color{#93c5fd}{x}}+{\color{#fcd34d}{3}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#93c5fd}{x}} = {\color{#fcd34d}{3}} \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Inecuații de gradul 2</div>
+        <div class="mjx-block">
+          <div class="math-label">dacă a &gt; 0 și Δ &gt; 0 cu x₁ &lt; x₂:</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#93c5fd}{b}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{c}} > {\color{#fcd34d}{0}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{x}} \in (-\infty,{\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}})\cup({\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}},+\infty) \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#93c5fd}{b}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{c}} < {\color{#fcd34d}{0}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{x}} \in ({\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}},\,{\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}}) \)</div>
+        </div>
+        <div class="tip-block"><p>Parabola cu a&gt;0 este pozitivă "în afara" rădăcinilor și negativă "între" rădăcini.</p></div>
+      </div>
+    </div>
+
+    <!-- SISTEME -->
+    <div class="section" id="sisteme">
+      <div class="section-header">
+        <span class="section-number">S1</span>
+        <h2 class="section-title">Sisteme de ecuații</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Metode de rezolvare</div>
+        <div class="mjx-block">
+          <div class="math-row">\( \begin{cases} {\color{#93c5fd}{a}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{b}}{\color{#93c5fd}{y}}={\color{#93c5fd}{e}} \\ {\color{#93c5fd}{c}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{d}}{\color{#93c5fd}{y}}={\color{#93c5fd}{f}} \end{cases} \) <span class="math-comment">// substituție sau reducere</span></div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \(\begin{cases}{\color{#fcd34d}{2}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{y}}={\color{#fcd34d}{5}}\\ {\color{#93c5fd}{x}}-{\color{#93c5fd}{y}}={\color{#fcd34d}{1}}\end{cases}\)</div>
+          <div class="ex-step"><span class="step-num">+</span>\( {\color{#fcd34d}{3}}{\color{#93c5fd}{x}} = {\color{#fcd34d}{6}} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{x}} = {\color{#fcd34d}{2}} \) <span class="step-note">// adunăm ecuațiile</span></div>
+          <div class="ex-step"><span class="step-num">2.</span>\( {\color{#fcd34d}{2}} - {\color{#93c5fd}{y}} = {\color{#fcd34d}{1}} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{y}} = {\color{#fcd34d}{1}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( ({\color{#93c5fd}{x}},{\color{#93c5fd}{y}}) = ({\color{#fcd34d}{2}},{\color{#fcd34d}{1}}) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         SUBIECTUL II — FUNCȚII
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="functii">
+      <div class="section-header">
+        <span class="section-number">S2</span>
+        <h2 class="section-title">Noțiuni despre funcții</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Concepte fundamentale</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{f}} : {\color{#67e8f9}{A}} {\color{#f0abfc}{\to}} {\color{#67e8f9}{B}} \) <span class="math-comment">// funcție de la A la B</span></div>
+          <div class="math-row">\( {\color{#67e8f9}{\operatorname{Dom}}}({\color{#93c5fd}{f}}) = {\color{#67e8f9}{A}}, \quad {\color{#67e8f9}{\operatorname{Im}}}({\color{#93c5fd}{f}}) = \{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\mid {\color{#93c5fd}{x}} \in {\color{#67e8f9}{A}}\} \)</div>
+          <div class="math-row">\( ({\color{#93c5fd}{f}} \circ {\color{#93c5fd}{g}})({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{f}}({\color{#93c5fd}{g}}({\color{#93c5fd}{x}})) \) <span class="math-comment">// compunere</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}^{{\color{#fb923c}{-1}}}({\color{#93c5fd}{y}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{x}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{y}} \) <span class="math-comment">// funcția inversă</span></div>
+        </div>
+        <table class="math-table">
+          <thead><tr><th>Proprietate</th><th>Definiție</th></tr></thead>
+          <tbody>
+            <tr><td>Injectivă</td><td>\({\color{#93c5fd}{x}}_1 \ne {\color{#93c5fd}{x}}_2 \Rightarrow {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}_1) \ne {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}_2)\)</td></tr>
+            <tr><td>Surjectivă</td><td>\(\forall {\color{#93c5fd}{y}} \in {\color{#67e8f9}{B}},\, \exists {\color{#93c5fd}{x}} \in {\color{#67e8f9}{A}}: {\color{#93c5fd}{f}}({\color{#93c5fd}{x}})={\color{#93c5fd}{y}}\)</td></tr>
+            <tr><td>Pară</td><td>\({\color{#93c5fd}{f}}(-{\color{#93c5fd}{x}})={\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\)</td></tr>
+            <tr><td>Impară</td><td>\({\color{#93c5fd}{f}}(-{\color{#93c5fd}{x}})=-{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\)</td></tr>
+            <tr><td>Periodică</td><td>\({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}+{\color{#93c5fd}{T}})={\color{#93c5fd}{f}}({\color{#93c5fd}{x}}),\ \forall {\color{#93c5fd}{x}}\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="functii-elem">
+      <div class="section-header">
+        <span class="section-number">S2</span>
+        <h2 class="section-title">Funcții elementare</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Funcția afină și parabola</div>
+        <div class="mjx-block">
+          <div class="math-label">Funcția afină:</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{m}}{\color{#93c5fd}{x}} + {\color{#93c5fd}{n}} \) <span class="math-comment">// m = pantă, n = ordonată</span></div>
+          <div class="math-label" style="margin-top:8px">Parabola (gradul 2):</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} + {\color{#93c5fd}{b}}{\color{#93c5fd}{x}} + {\color{#93c5fd}{c}} \quad ({\color{#93c5fd}{a}} \ne {\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( V\!\left(-\dfrac{{\color{#93c5fd}{b}}}{{\color{#fcd34d}{2}}{\color{#93c5fd}{a}}},\; -\dfrac{{\color{#67e8f9}{\Delta}}}{{\color{#fcd34d}{4}}{\color{#93c5fd}{a}}}\right) \) <span class="math-comment">// vârful parabolei</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}\!\left({\color{#93c5fd}{x}} - {\color{#93c5fd}{x}}_V\right)^{{\color{#fb923c}{2}}} + {\color{#93c5fd}{y}}_V \) <span class="math-comment">// forma canonică</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRIGONOMETRIE -->
+    <div class="section" id="trig">
+      <div class="section-header">
+        <span class="section-number">S2</span>
+        <h2 class="section-title">Funcții trigonometrice</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Valori speciale</div>
+        <table class="math-table">
+          <thead><tr><th>Unghi</th><th>\({\color{#86efac}{\sin}}\)</th><th>\({\color{#86efac}{\cos}}\)</th><th>\({\color{#86efac}{\tan}}\)</th></tr></thead>
+          <tbody>
+            <tr><td>\({\color{#fcd34d}{0}}\)</td><td>\({\color{#fcd34d}{0}}\)</td><td>\({\color{#fcd34d}{1}}\)</td><td>\({\color{#fcd34d}{0}}\)</td></tr>
+            <tr><td>\(\dfrac{\pi}{{\color{#fcd34d}{6}}}\)</td><td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}}\)</td><td>\(\dfrac{{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}}{{\color{#fcd34d}{2}}}\)</td><td>\(\dfrac{{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}}{{\color{#fcd34d}{3}}}\)</td></tr>
+            <tr><td>\(\dfrac{\pi}{{\color{#fcd34d}{4}}}\)</td><td>\(\dfrac{{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}}}{{\color{#fcd34d}{2}}}\)</td><td>\(\dfrac{{\color{#86efac}{\sqrt{{\color{#fcd34d}{2}}}}}}{{\color{#fcd34d}{2}}}\)</td><td>\({\color{#fcd34d}{1}}\)</td></tr>
+            <tr><td>\(\dfrac{\pi}{{\color{#fcd34d}{3}}}\)</td><td>\(\dfrac{{\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}}{{\color{#fcd34d}{2}}}\)</td><td>\(\dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}}\)</td><td>\({\color{#86efac}{\sqrt{{\color{#fcd34d}{3}}}}}\)</td></tr>
+            <tr><td>\(\dfrac{\pi}{{\color{#fcd34d}{2}}}\)</td><td>\({\color{#fcd34d}{1}}\)</td><td>\({\color{#fcd34d}{0}}\)</td><td>—</td></tr>
+            <tr><td>\(\pi\)</td><td>\({\color{#fcd34d}{0}}\)</td><td>\({\color{#f0abfc}{-}}{\color{#fcd34d}{1}}\)</td><td>\({\color{#fcd34d}{0}}\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Identități fundamentale</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}} + {\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \) <span class="math-comment">// relația fundamentală</span></div>
+          <div class="math-row">\( {\color{#86efac}{\tan}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\sin}} {\color{#93c5fd}{x}}}{{\color{#86efac}{\cos}} {\color{#93c5fd}{x}}} \qquad {\color{#86efac}{\cot}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\cos}} {\color{#93c5fd}{x}}}{{\color{#86efac}{\sin}} {\color{#93c5fd}{x}}} \)</div>
+          <div class="math-row">\( {\color{#fcd34d}{1}} + {\color{#86efac}{\tan}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}} \qquad {\color{#fcd34d}{1}} + {\color{#86efac}{\cot}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}} \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Formule de adunare și dublare</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\sin}}({\color{#93c5fd}{a}} \pm {\color{#93c5fd}{b}}) {\color{#f0abfc}{=}} {\color{#86efac}{\sin}}{\color{#93c5fd}{a}}\, {\color{#86efac}{\cos}}{\color{#93c5fd}{b}} \pm {\color{#86efac}{\cos}}{\color{#93c5fd}{a}}\, {\color{#86efac}{\sin}}{\color{#93c5fd}{b}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\cos}}({\color{#93c5fd}{a}} \pm {\color{#93c5fd}{b}}) {\color{#f0abfc}{=}} {\color{#86efac}{\cos}}{\color{#93c5fd}{a}}\, {\color{#86efac}{\cos}}{\color{#93c5fd}{b}} \mp {\color{#86efac}{\sin}}{\color{#93c5fd}{a}}\, {\color{#86efac}{\sin}}{\color{#93c5fd}{b}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\tan}}({\color{#93c5fd}{a}} \pm {\color{#93c5fd}{b}}) {\color{#f0abfc}{=}} \dfrac{{\color{#86efac}{\tan}}{\color{#93c5fd}{a}} \pm {\color{#86efac}{\tan}}{\color{#93c5fd}{b}}}{{\color{#fcd34d}{1}} \mp {\color{#86efac}{\tan}}{\color{#93c5fd}{a}}\, {\color{#86efac}{\tan}}{\color{#93c5fd}{b}}} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Formule de unghi dublu:</div>
+          <div class="math-row">\( {\color{#86efac}{\sin}} {\color{#fcd34d}{2}}{\color{#93c5fd}{a}} {\color{#f0abfc}{=}} {\color{#fcd34d}{2}}\,{\color{#86efac}{\sin}}{\color{#93c5fd}{a}}\, {\color{#86efac}{\cos}}{\color{#93c5fd}{a}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\cos}} {\color{#fcd34d}{2}}{\color{#93c5fd}{a}} {\color{#f0abfc}{=}} {\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}}{\color{#93c5fd}{a}} - {\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}}{\color{#93c5fd}{a}} {\color{#f0abfc}{=}} {\color{#fcd34d}{2}}{\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}}{\color{#93c5fd}{a}} - {\color{#fcd34d}{1}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} - {\color{#fcd34d}{2}}{\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}}{\color{#93c5fd}{a}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\tan}} {\color{#fcd34d}{2}}{\color{#93c5fd}{a}} {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{2}}\,{\color{#86efac}{\tan}}{\color{#93c5fd}{a}}}{{\color{#fcd34d}{1}}-{\color{#86efac}{\tan}}^{{\color{#fb923c}{2}}}{\color{#93c5fd}{a}}} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUNCTII EXP LOG -->
+    <div class="section" id="exp-log-fn">
+      <div class="section-header">
+        <span class="section-number">S2</span>
+        <h2 class="section-title">Funcții exponențiale și logaritmice</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Proprietăți grafice</div>
+        <div class="mjx-block">
+          <div class="math-label">Funcția exponențială f(x) = aˣ (a &gt; 0, a ≠ 1):</div>
+          <div class="math-row">\( {\color{#67e8f9}{\operatorname{Dom}}} = {\color{#67e8f9}{\mathbb{R}}},\quad {\color{#67e8f9}{\operatorname{Im}}} = ({\color{#fcd34d}{0}},+\infty) \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{a}} > {\color{#fcd34d}{1}} {\color{#f0abfc}{\implies}} \small\text{crescătoare} \qquad {\color{#fcd34d}{0}} < {\color{#93c5fd}{a}} < {\color{#fcd34d}{1}} {\color{#f0abfc}{\implies}} \small\text{descrescătoare} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#fcd34d}{0}}) {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \) <span class="math-comment">// graficul trece prin (0, 1)</span></div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Funcția logaritmică f(x) = log_a(x):</div>
+          <div class="math-row">\( {\color{#67e8f9}{\operatorname{Dom}}} = ({\color{#fcd34d}{0}},+\infty),\quad {\color{#67e8f9}{\operatorname{Im}}} = {\color{#67e8f9}{\mathbb{R}}} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}({\color{#fcd34d}{1}}) {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \) <span class="math-comment">// graficul trece prin (1, 0)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIMITE -->
+    <div class="section" id="limite">
+      <div class="section-header">
+        <span class="section-number">S2</span>
+        <h2 class="section-title">Limite de funcții</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Limite fundamentale</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{0}}}\dfrac{{\color{#86efac}{\sin}} {\color{#93c5fd}{x}}}{{\color{#93c5fd}{x}}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{0}}}({\color{#fcd34d}{1}}+{\color{#93c5fd}{x}})^{{\color{#fb923c}{1/x}}} {\color{#f0abfc}{=}} {\color{#fcd34d}{e}} \approx {\color{#fcd34d}{2{,}718}} \)</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{0}}}\dfrac{{\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}}-{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \qquad {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{0}}}\dfrac{{\color{#86efac}{\ln}}({\color{#fcd34d}{1}}+{\color{#93c5fd}{x}})}{{\color{#93c5fd}{x}}} {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Forme nedeterminate: 0/0, ∞/∞, ∞−∞, 0·∞</div>
+          <div class="math-row">\( \dfrac{{\color{#fcd34d}{0}}}{{\color{#fcd34d}{0}}} {\color{#f0abfc}{\implies}} \) factorizezi și simplifici</div>
+          <div class="math-row">\( \dfrac{\infty}{\infty} {\color{#f0abfc}{\implies}} \) împarți la puterea maximă a lui \({\color{#93c5fd}{x}}\)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \(\displaystyle{\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{2}}}\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{4}}}{{\color{#93c5fd}{x}}-{\color{#fcd34d}{2}}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{2}}}\dfrac{({\color{#93c5fd}{x}}-{\color{#fcd34d}{2}})({\color{#93c5fd}{x}}+{\color{#fcd34d}{2}})}{{\color{#93c5fd}{x}}-{\color{#fcd34d}{2}}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#fcd34d}{2}}}({\color{#93c5fd}{x}}+{\color{#fcd34d}{2}}) \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#fcd34d}{4}} \)</div>
+        </div>
+        <div class="tip-block"><p>Regulă rapidă la x→∞: grad(P) = grad(Q) → limita = raport coeficienți principali; grad(P) &lt; grad(Q) → 0; grad(P) &gt; grad(Q) → ±∞.</p></div>
+      </div>
+    </div>
+
+    <!-- CONTINUITATE -->
+    <div class="section" id="continuitate">
+      <div class="section-header">
+        <span class="section-number">S2</span>
+        <h2 class="section-title">Continuitate</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Definiție și condiții</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{f}} \text{ continuă în } {\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}} {\color{#f0abfc}{\iff}} {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}) \)</div>
+        </div>
+        <div class="tip-block"><p>Teorema lui Bolzano: dacă \(f\) este continuă pe \([a,b]\) și \(f(a)\cdot f(b) < 0\), atunci \(\exists\, c\in(a,b)\) cu \(f(c)=0\).</p></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════
+         SUBIECTUL III — CALCUL DIFERENȚIAL
+    ════════════════════════════════════════ -->
+
+    <div class="section" id="derivate">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Derivata unei funcții</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Definiție și ecuația tangentei</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}) {\color{#f0abfc}{=}} {\color{#86efac}{\lim}}_{{\color{#93c5fd}{h}}\to {\color{#fcd34d}{0}}}\dfrac{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}+{\color{#93c5fd}{h}})-{\color{#93c5fd}{f}}({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}})}{{\color{#93c5fd}{h}}} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} \dfrac{d{\color{#93c5fd}{f}}}{d{\color{#93c5fd}{x}}} \) <span class="math-comment">// notație Leibniz</span></div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Ecuația tangentei la grafic în x₀:</div>
+          <div class="math-row">\( {\color{#93c5fd}{y}} - {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}})\cdot({\color{#93c5fd}{x}}-{\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="reguli-deriv">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Reguli și formule de derivare</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Derivate elementare</div>
+        <div class="mjx-block">
+          <div class="math-row">\( ({\color{#93c5fd}{c}})' {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \qquad ({\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} {\color{#fcd34d}{1}} \)</div>
+          <div class="math-row">\( ({\color{#93c5fd}{x}}^{{\color{#fb923c}{n}}})' {\color{#f0abfc}{=}} {\color{#fb923c}{n}}\,{\color{#93c5fd}{x}}^{{\color{#fb923c}{n-1}}} \quad ({\color{#fb923c}{n}}\in\mathbb{R}) \)</div>
+          <div class="math-row">\( ({\color{#86efac}{\sqrt{{\color{#93c5fd}{x}}}}})' {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}{\color{#86efac}{\sqrt{{\color{#93c5fd}{x}}}}}} \qquad \left(\dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}\right)' {\color{#f0abfc}{=}} -\dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}} \)</div>
+          <div class="math-row">\( ({\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}})' {\color{#f0abfc}{=}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}} \) <span class="math-comment">// se derivează în ea însăși!</span></div>
+          <div class="math-row">\( ({\color{#93c5fd}{a}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}})' {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}} {\color{#86efac}{\ln}} {\color{#93c5fd}{a}} \qquad ({\color{#86efac}{\ln}} {\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}} \)</div>
+          <div class="math-row">\( ({\color{#86efac}{\log}}_{{\color{#93c5fd}{a}}} {\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}\,{\color{#86efac}{\ln}} {\color{#93c5fd}{a}}} \)</div>
+          <div class="math-row">\( ({\color{#86efac}{\sin}} {\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} {\color{#86efac}{\cos}} {\color{#93c5fd}{x}} \qquad ({\color{#86efac}{\cos}} {\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} -{\color{#86efac}{\sin}} {\color{#93c5fd}{x}} \)</div>
+          <div class="math-row">\( ({\color{#86efac}{\tan}} {\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}} \qquad ({\color{#86efac}{\cot}} {\color{#93c5fd}{x}})' {\color{#f0abfc}{=}} -\dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}} \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Reguli de derivare</div>
+        <div class="mjx-block">
+          <div class="math-row">\( ({\color{#93c5fd}{f}}+{\color{#93c5fd}{g}})' {\color{#f0abfc}{=}} {\color{#93c5fd}{f}}'+{\color{#93c5fd}{g}}' \)</div>
+          <div class="math-row">\( ({\color{#93c5fd}{c}}\cdot{\color{#93c5fd}{f}})' {\color{#f0abfc}{=}} {\color{#93c5fd}{c}}\cdot{\color{#93c5fd}{f}}' \)</div>
+          <div class="math-row">\( ({\color{#93c5fd}{f}}\cdot{\color{#93c5fd}{g}})' {\color{#f0abfc}{=}} {\color{#93c5fd}{f}}'{\color{#93c5fd}{g}} + {\color{#93c5fd}{f}}{\color{#93c5fd}{g}}' \) <span class="math-comment">// Leibniz</span></div>
+          <div class="math-row">\( \left(\dfrac{{\color{#93c5fd}{f}}}{{\color{#93c5fd}{g}}}\right)' {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{f}}'{\color{#93c5fd}{g}} - {\color{#93c5fd}{f}}{\color{#93c5fd}{g}}'}{{\color{#93c5fd}{g}}^{{\color{#fb923c}{2}}}} \quad ({\color{#93c5fd}{g}}\ne{\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( ({\color{#93c5fd}{f}}\circ{\color{#93c5fd}{g}})'({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{f}}'({\color{#93c5fd}{g}}({\color{#93c5fd}{x}}))\cdot {\color{#93c5fd}{g}}'({\color{#93c5fd}{x}}) \) <span class="math-comment">// REGULA LANȚULUI</span></div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Derivate compuse frecvente la BAC:</div>
+          <div class="math-row">\( \bigl[{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})^{{\color{#fb923c}{n}}}\bigr]' {\color{#f0abfc}{=}} {\color{#fb923c}{n}}\,{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})^{{\color{#fb923c}{n-1}}}\cdot {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) \)</div>
+          <div class="math-row">\( \bigl[{\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}}}\bigr]' {\color{#f0abfc}{=}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}}}\cdot {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) \)</div>
+          <div class="math-row">\( \bigl[{\color{#86efac}{\ln}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\bigr]' {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})}{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})} \quad ({\color{#93c5fd}{f}}({\color{#93c5fd}{x}})>{\color{#fcd34d}{0}}) \)</div>
+          <div class="math-row">\( \bigl[{\color{#86efac}{\sin}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\bigr]' {\color{#f0abfc}{=}} {\color{#86efac}{\cos}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\cdot {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) \)</div>
+          <div class="math-row">\( \bigl[{\color{#86efac}{\sqrt{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}}}\bigr]' {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})}{{\color{#fcd34d}{2}}{\color{#86efac}{\sqrt{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}}}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Regula lanțului: \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) = {\color{#86efac}{\sin}}({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}})\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) = {\color{#86efac}{\cos}}({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}})\cdot({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}})' \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#fcd34d}{2}}{\color{#93c5fd}{x}}\,{\color{#86efac}{\cos}}({\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}) \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Produs: \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}})={\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#93c5fd}{f}}' = {\color{#fcd34d}{2}}{\color{#93c5fd}{x}}\cdot {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}} + {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}\cdot {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#93c5fd}{x}}{\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}}({\color{#93c5fd}{x}}+{\color{#fcd34d}{2}}) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONOTONIE -->
+    <div class="section" id="monotonie">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Monotonie și extreme locale</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Relația derivată – monotonie</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) > {\color{#fcd34d}{0}} \text{ pe } ({\color{#93c5fd}{a}},{\color{#93c5fd}{b}}) {\color{#f0abfc}{\implies}} {\color{#93c5fd}{f}} \small\text{ CRESCĂTOARE} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}) < {\color{#fcd34d}{0}} \text{ pe } ({\color{#93c5fd}{a}},{\color{#93c5fd}{b}}) {\color{#f0abfc}{\implies}} {\color{#93c5fd}{f}} \small\text{ DESCRESCĂTOARE} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}) {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \text{ și } {\color{#93c5fd}{f}}' : {\color{#f0abfc}{+}} \to {\color{#f0abfc}{-}} {\color{#f0abfc}{\implies}} \small\text{MAXIM LOCAL} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}) {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \text{ și } {\color{#93c5fd}{f}}' : {\color{#f0abfc}{-}} \to {\color{#f0abfc}{+}} {\color{#f0abfc}{\implies}} \small\text{MINIM LOCAL} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Studiu: \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}})={\color{#93c5fd}{x}}^{{\color{#fb923c}{3}}}-{\color{#fcd34d}{3}}{\color{#93c5fd}{x}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})={\color{#fcd34d}{3}}{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}-{\color{#fcd34d}{3}}={\color{#fcd34d}{3}}({\color{#93c5fd}{x}}-{\color{#fcd34d}{1}})({\color{#93c5fd}{x}}+{\color{#fcd34d}{1}}) \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>Semn f′: (+) pe (−∞,−1) | (−) pe (−1,1) | (+) pe (1,+∞)</div>
+          <div class="ex-step"><span class="step-num">3.</span>\( {\color{#93c5fd}{x}}={\color{#f0abfc}{-}}{\color{#fcd34d}{1}} \): maxim local, \({\color{#93c5fd}{f}}({\color{#f0abfc}{-}}{\color{#fcd34d}{1}})={\color{#fcd34d}{2}}\)</div>
+          <div class="ex-step result-step"><span class="step-num">4.</span>\( {\color{#93c5fd}{x}}={\color{#fcd34d}{1}} \): minim local, \({\color{#93c5fd}{f}}({\color{#fcd34d}{1}})={\color{#f0abfc}{-}}{\color{#fcd34d}{2}}\)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCAVITATE -->
+    <div class="section" id="concavitate">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Concavitate și puncte de inflexiune</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Derivata a doua</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{f}}''({\color{#93c5fd}{x}}) > {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{grafic CONVEX } \cup \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}''({\color{#93c5fd}{x}}) < {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{grafic CONCAV } \cap \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}''({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}){\color{#f0abfc}{=}}{\color{#fcd34d}{0}} \small\text{ + schimbare semn} {\color{#f0abfc}{\implies}} \small\text{INFLEXIUNE} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Test derivata a doua:</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}){\color{#f0abfc}{=}}{\color{#fcd34d}{0}} \text{ și } {\color{#93c5fd}{f}}''({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}})>{\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{MINIM LOCAL} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}){\color{#f0abfc}{=}}{\color{#fcd34d}{0}} \text{ și } {\color{#93c5fd}{f}}''({\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}})<{\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{MAXIM LOCAL} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASIMPTOTE -->
+    <div class="section" id="asimptote">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Asimptote</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Cele trei tipuri de asimptote</div>
+        <div class="mjx-block">
+          <div class="math-label">1. Asimptotă verticală x = a:</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to {\color{#93c5fd}{a}}^{\pm}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} \pm\infty \)</div>
+          <div class="math-label" style="margin-top:8px">2. Asimptotă orizontală y = L:</div>
+          <div class="math-row">\( {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to\pm\infty} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{L}} \quad ({\color{#93c5fd}{L}}\in\mathbb{R}) \)</div>
+          <div class="math-label" style="margin-top:8px">3. Asimptotă oblică y = mx + n:</div>
+          <div class="math-row">\( {\color{#93c5fd}{m}} {\color{#f0abfc}{=}} {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to\pm\infty}\dfrac{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}{{\color{#93c5fd}{x}}} \qquad {\color{#93c5fd}{n}} {\color{#f0abfc}{=}} {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to\pm\infty}\bigl[{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})-{\color{#93c5fd}{m}}{\color{#93c5fd}{x}}\bigr] \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}})=\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}\)</div>
+          <div class="ex-step"><span class="step-num">•</span>Asimptotă verticală: \({\color{#93c5fd}{x}}={\color{#fcd34d}{0}}\)</div>
+          <div class="ex-step"><span class="step-num">•</span>\( {\color{#93c5fd}{m}} = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to\infty}\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}} = {\color{#fcd34d}{1}} \)</div>
+          <div class="ex-step"><span class="step-num">•</span>\( {\color{#93c5fd}{n}} = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to\infty}\left[\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}+{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}-{\color{#93c5fd}{x}}\right] = {\color{#86efac}{\lim}}_{{\color{#93c5fd}{x}}\to\infty}\dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}} = {\color{#fcd34d}{0}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>Asimptotă oblică: \({\color{#93c5fd}{y}} = {\color{#93c5fd}{x}}\)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDIUL FUNCTIEI -->
+    <div class="section" id="grafice">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Studiul complet al unei funcții</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Pașii studiului de funcție la BAC</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#fcd34d}{1.}} \) Domeniu de definiție \({\color{#67e8f9}{\operatorname{Dom}}}({\color{#93c5fd}{f}})\)</div>
+          <div class="math-row">\( {\color{#fcd34d}{2.}} \) Paritate / imparitate: \({\color{#93c5fd}{f}}(-{\color{#93c5fd}{x}}) = ?\)</div>
+          <div class="math-row">\( {\color{#fcd34d}{3.}} \) Intersecții: \({\color{#93c5fd}{f}}({\color{#93c5fd}{x}}){\color{#f0abfc}{=}}{\color{#fcd34d}{0}}\) (cu Ox), \({\color{#93c5fd}{f}}({\color{#fcd34d}{0}})\) (cu Oy)</div>
+          <div class="math-row">\( {\color{#fcd34d}{4.}} \) Asimptote (verticale, orizontale, oblice)</div>
+          <div class="math-row">\( {\color{#fcd34d}{5.}} \) Monotonie + extreme: semn \({\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})\)</div>
+          <div class="math-row">\( {\color{#fcd34d}{6.}} \) Concavitate + inflexiune: semn \({\color{#93c5fd}{f}}''({\color{#93c5fd}{x}})\)</div>
+          <div class="math-row">\( {\color{#fcd34d}{7.}} \) Graficul — trasarea</div>
+        </div>
+        <div class="tip-block"><p>Examinatorii punctează fiecare pas separat — chiar dacă greșești la un pas, câștigi puncte pentru pașii corecți!</p></div>
+      </div>
+    </div>
+
+    <!-- INTEGRALE -->
+    <div class="section" id="integrale">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Integrale definite</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Teorema fundamentală a calculului</div>
+        <div class="mjx-block">
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} {\color{#93c5fd}{f}}({\color{#93c5fd}{x}})\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#93c5fd}{F}}({\color{#93c5fd}{b}}) - {\color{#93c5fd}{F}}({\color{#93c5fd}{a}}) {\color{#f0abfc}{=}} \Bigl[{\color{#93c5fd}{F}}({\color{#93c5fd}{x}})\Bigr]_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Proprietăți:</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} [{\color{#93c5fd}{f}}\pm{\color{#93c5fd}{g}}]\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} {\color{#93c5fd}{f}}\,d{\color{#93c5fd}{x}} \pm {\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} {\color{#93c5fd}{g}}\,d{\color{#93c5fd}{x}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} {\color{#93c5fd}{c}}\,{\color{#93c5fd}{f}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#93c5fd}{c}}{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} {\color{#93c5fd}{f}}\,d{\color{#93c5fd}{x}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{a}}} {\color{#93c5fd}{f}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \qquad {\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} {\color{#93c5fd}{f}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} -{\color{#86efac}{\int}}_{{\color{#93c5fd}{b}}}^{{\color{#93c5fd}{a}}} {\color{#93c5fd}{f}}\,d{\color{#93c5fd}{x}} \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Aria suprafeței:</div>
+          <div class="math-row">\( {\color{#67e8f9}{A}} {\color{#f0abfc}{=}} \displaystyle{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} |{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})|\,d{\color{#93c5fd}{x}} \) <span class="math-comment">// dintre grafic și Ox</span></div>
+          <div class="math-row">\( {\color{#67e8f9}{A}} {\color{#f0abfc}{=}} \displaystyle{\color{#86efac}{\int}}_{{\color{#93c5fd}{a}}}^{{\color{#93c5fd}{b}}} |{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})-{\color{#93c5fd}{g}}({\color{#93c5fd}{x}})|\,d{\color{#93c5fd}{x}} \) <span class="math-comment">// dintre două grafice</span></div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Exemplu: Aria sub \({\color{#93c5fd}{y}}={\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}\) pe \([{\color{#fcd34d}{0}},{\color{#fcd34d}{2}}]\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#67e8f9}{A}} = \displaystyle{\color{#86efac}{\int}}_{{\color{#fcd34d}{0}}}^{{\color{#fcd34d}{2}}} {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}}\,d{\color{#93c5fd}{x}} = \left[\dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{3}}}}{{\color{#fcd34d}{3}}}\right]_{{\color{#fcd34d}{0}}}^{{\color{#fcd34d}{2}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( \dfrac{{\color{#fcd34d}{8}}}{{\color{#fcd34d}{3}}} \text{ u.a.} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIMITIVE -->
+    <div class="section" id="prim">
+      <div class="section-header">
+        <span class="section-number">S3</span>
+        <h2 class="section-title">Primitive (integrale nedefinite)</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Tabel de primitive</div>
+        <div class="mjx-block">
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{x}}^{{\color{#fb923c}{n}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{x}}^{{\color{#fb923c}{n+1}}}}{{\color{#fb923c}{n+1}}} + {\color{#67e8f9}{C}} \quad ({\color{#fb923c}{n}}\ne -{\color{#fcd34d}{1}}) \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{x}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\ln}}|{\color{#93c5fd}{x}}| + {\color{#67e8f9}{C}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}} + {\color{#67e8f9}{C}} \qquad \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{a}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{a}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}}}}}{{\color{#86efac}{\ln}} {\color{#93c5fd}{a}}}+{\color{#67e8f9}{C}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#86efac}{\sin}} {\color{#93c5fd}{x}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} -{\color{#86efac}{\cos}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}} \qquad \displaystyle{\color{#86efac}{\int}} {\color{#86efac}{\cos}} {\color{#93c5fd}{x}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\sin}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\cos}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\tan}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}} \qquad \displaystyle{\color{#86efac}{\int}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#86efac}{\sin}}^{{\color{#fb923c}{2}}} {\color{#93c5fd}{x}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} -{\color{#86efac}{\cot}} {\color{#93c5fd}{x}} + {\color{#67e8f9}{C}} \)</div>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Metode de integrare</div>
+        <div class="mjx-block">
+          <div class="math-label">Schimbare de variabilă (t = g(x)):</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{f}}({\color{#93c5fd}{g}}({\color{#93c5fd}{x}}))\cdot {\color{#93c5fd}{g}}'({\color{#93c5fd}{x}})\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{f}}({\color{#93c5fd}{t}})\,d{\color{#93c5fd}{t}} \)</div>
+          <div class="math-label" style="margin-top:8px">Integrare prin părți:</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{u}}\,d{\color{#93c5fd}{v}} {\color{#f0abfc}{=}} {\color{#93c5fd}{u}}\cdot{\color{#93c5fd}{v}} - \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{v}}\,d{\color{#93c5fd}{u}} \)</div>
+          <div class="math-label" style="margin-top:8px">Primitive de tip compus:</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} \dfrac{{\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})}{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#86efac}{\ln}}|{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})| + {\color{#67e8f9}{C}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})\cdot[{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})]^{{\color{#fb923c}{n}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{[{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})]^{{\color{#fb923c}{n+1}}}}{{\color{#fb923c}{n+1}}} + {\color{#67e8f9}{C}} \)</div>
+          <div class="math-row">\( \displaystyle{\color{#86efac}{\int}} {\color{#93c5fd}{f}}'({\color{#93c5fd}{x}})\cdot {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}}}\,d{\color{#93c5fd}{x}} {\color{#f0abfc}{=}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{f}}({\color{#93c5fd}{x}})}}} + {\color{#67e8f9}{C}} \)</div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Substituție: \(\displaystyle{\color{#86efac}{\int}} {\color{#fcd34d}{2}}{\color{#93c5fd}{x}}\,{\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}^2}}}\,d{\color{#93c5fd}{x}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( {\color{#93c5fd}{t}} = {\color{#93c5fd}{x}}^{{\color{#fb923c}{2}}} {\color{#f0abfc}{\implies}} d{\color{#93c5fd}{t}} = {\color{#fcd34d}{2}}{\color{#93c5fd}{x}}\,d{\color{#93c5fd}{x}} \)</div>
+          <div class="ex-step"><span class="step-num">2.</span>\( \displaystyle{\color{#86efac}{\int}} {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{t}}}}}\,d{\color{#93c5fd}{t}} = {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{t}}}}} + {\color{#67e8f9}{C}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( {\color{#fcd34d}{e}}^{{\color{#fb923c}{{\color{#93c5fd}{x}}^2}}} + {\color{#67e8f9}{C}} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- MATRICE -->
+    <div class="section" id="matrice">
+      <div class="section-header">
+        <span class="section-number">+</span>
+        <h2 class="section-title">Matrice</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Operații cu matrice</div>
+        <div class="mjx-block">
+          <div class="math-row">\( ({\color{#93c5fd}{A}}+{\color{#93c5fd}{B}})_{ij} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}_{ij}+{\color{#93c5fd}{b}}_{ij} \) <span class="math-comment">// aceeași dimensiune</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{c}}_{ij} {\color{#f0abfc}{=}} \sum_{{\color{#93c5fd}{k}}} {\color{#93c5fd}{a}}_{i{\color{#93c5fd}{k}}}\cdot {\color{#93c5fd}{b}}_{{\color{#93c5fd}{k}}j} \) <span class="math-comment">// produs: linie × coloană</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{A}} \cdot {\color{#93c5fd}{B}} \ne {\color{#93c5fd}{B}} \cdot {\color{#93c5fd}{A}} \) <span class="math-comment">// produsul NU e comutativ!</span></div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-label">Inversa matricei 2×2:</div>
+          <div class="math-row">\( {\color{#93c5fd}{A}} = \begin{pmatrix}{\color{#93c5fd}{a}}&{\color{#93c5fd}{b}}\\{\color{#93c5fd}{c}}&{\color{#93c5fd}{d}}\end{pmatrix} {\color{#f0abfc}{\implies}} {\color{#93c5fd}{A}}^{{\color{#fb923c}{-1}}} = \dfrac{{\color{#fcd34d}{1}}}{{\color{#93c5fd}{a}}{\color{#93c5fd}{d}}-{\color{#93c5fd}{b}}{\color{#93c5fd}{c}}}\begin{pmatrix}{\color{#93c5fd}{d}}&-{\color{#93c5fd}{b}}\\-{\color{#93c5fd}{c}}&{\color{#93c5fd}{a}}\end{pmatrix} \)</div>
+        </div>
+        <div class="warn-block"><p>⚠️ Înmulțirea matricelor NU este comutativă: \(AB \ne BA\) în general!</p></div>
+      </div>
+    </div>
+
+    <!-- DETERMINANTI -->
+    <div class="section" id="determinanti">
+      <div class="section-header">
+        <span class="section-number">+</span>
+        <h2 class="section-title">Determinanți</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Calcul determinanți</div>
+        <div class="mjx-block">
+          <div class="math-label">Ordinul 2:</div>
+          <div class="math-row">\( \det\begin{pmatrix}{\color{#93c5fd}{a}}&{\color{#93c5fd}{b}}\\{\color{#93c5fd}{c}}&{\color{#93c5fd}{d}}\end{pmatrix} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}{\color{#93c5fd}{d}} - {\color{#93c5fd}{b}}{\color{#93c5fd}{c}} \)</div>
+          <div class="math-label" style="margin-top:8px">Ordinul 3 (regula lui Sarrus):</div>
+          <div class="math-row">\( \det\begin{pmatrix}{\color{#93c5fd}{a}}&{\color{#93c5fd}{b}}&{\color{#93c5fd}{c}}\\{\color{#93c5fd}{d}}&{\color{#93c5fd}{e}}&{\color{#93c5fd}{f}}\\{\color{#93c5fd}{g}}&{\color{#93c5fd}{h}}&{\color{#93c5fd}{i}}\end{pmatrix} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}{\color{#93c5fd}{e}}{\color{#93c5fd}{i}}+{\color{#93c5fd}{b}}{\color{#93c5fd}{f}}{\color{#93c5fd}{g}}+{\color{#93c5fd}{c}}{\color{#93c5fd}{d}}{\color{#93c5fd}{h}}-{\color{#93c5fd}{c}}{\color{#93c5fd}{e}}{\color{#93c5fd}{g}}-{\color{#93c5fd}{b}}{\color{#93c5fd}{d}}{\color{#93c5fd}{i}}-{\color{#93c5fd}{a}}{\color{#93c5fd}{f}}{\color{#93c5fd}{h}} \)</div>
+        </div>
+        <div class="tip-block"><p>Sarrus: copiezi primele 2 coloane la dreapta, faci produsele diagonalelor ↘ cu semn + și ↗ cu semn −.</p></div>
+        <div class="mjx-block">
+          <div class="math-row">\( \det({\color{#93c5fd}{A}}{\color{#93c5fd}{B}}) {\color{#f0abfc}{=}} \det{\color{#93c5fd}{A}} \cdot \det{\color{#93c5fd}{B}} \qquad \det({\color{#93c5fd}{A}}^{{\color{#fb923c}{T}}}) {\color{#f0abfc}{=}} \det{\color{#93c5fd}{A}} \)</div>
+          <div class="math-row">\( \det({\color{#93c5fd}{A}}^{{\color{#fb923c}{-1}}}) {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{\det{\color{#93c5fd}{A}}} \qquad \det({\color{#93c5fd}{k}}{\color{#93c5fd}{A}}) {\color{#f0abfc}{=}} {\color{#93c5fd}{k}}^{{\color{#fb923c}{n}}}\det{\color{#93c5fd}{A}} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SISTEME CRAMER -->
+    <div class="section" id="sisteme-mat">
+      <div class="section-header">
+        <span class="section-number">+</span>
+        <h2 class="section-title">Sisteme liniare — Regula lui Cramer</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Sistemul Ax = b</div>
+        <div class="mjx-block">
+          <div class="math-row">\( \begin{cases}{\color{#93c5fd}{a}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{b}}{\color{#93c5fd}{y}}={\color{#93c5fd}{e}}\\{\color{#93c5fd}{c}}{\color{#93c5fd}{x}}+{\color{#93c5fd}{d}}{\color{#93c5fd}{y}}={\color{#93c5fd}{f}}\end{cases} \)</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} {\color{#f0abfc}{=}} \det\begin{pmatrix}{\color{#93c5fd}{a}}&{\color{#93c5fd}{b}}\\{\color{#93c5fd}{c}}&{\color{#93c5fd}{d}}\end{pmatrix} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}{\color{#93c5fd}{d}}-{\color{#93c5fd}{b}}{\color{#93c5fd}{c}} \)</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{x}}} {\color{#f0abfc}{=}} \det\begin{pmatrix}{\color{#93c5fd}{e}}&{\color{#93c5fd}{b}}\\{\color{#93c5fd}{f}}&{\color{#93c5fd}{d}}\end{pmatrix} \qquad {\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{y}}} {\color{#f0abfc}{=}} \det\begin{pmatrix}{\color{#93c5fd}{a}}&{\color{#93c5fd}{e}}\\{\color{#93c5fd}{c}}&{\color{#93c5fd}{f}}\end{pmatrix} \)</div>
+          <div class="math-row">\( {\color{#93c5fd}{x}} {\color{#f0abfc}{=}} \dfrac{{\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{x}}}}{{\color{#67e8f9}{\Delta}}}, \quad {\color{#93c5fd}{y}} {\color{#f0abfc}{=}} \dfrac{{\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{y}}}}{{\color{#67e8f9}{\Delta}}} \quad ({\color{#67e8f9}{\Delta}} \ne {\color{#fcd34d}{0}}) \)</div>
+        </div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} \ne {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{soluție unică} \)</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}},\; {\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{x}}},{\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{y}}} \ne {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \small\text{incompatibil} \)</div>
+          <div class="math-row">\( {\color{#67e8f9}{\Delta}} {\color{#f0abfc}{=}} {\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{x}}} {\color{#f0abfc}{=}} {\color{#67e8f9}{\Delta}}_{{\color{#93c5fd}{y}}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} {\color{#f0abfc}{\implies}} \infty \small\text{ soluții} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VECTORI -->
+    <div class="section" id="vectori">
+      <div class="section-header">
+        <span class="section-number">+</span>
+        <h2 class="section-title">Vectori</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Operații cu vectori</div>
+        <div class="mjx-block">
+          <div class="math-row">\( \vec{{\color{#93c5fd}{a}}} = ({\color{#93c5fd}{a}}_{{\color{#fcd34d}{1}}}, {\color{#93c5fd}{a}}_{{\color{#fcd34d}{2}}}),\quad \vec{{\color{#93c5fd}{a}}}+\vec{{\color{#93c5fd}{b}}} = ({\color{#93c5fd}{a}}_{{\color{#fcd34d}{1}}}+{\color{#93c5fd}{b}}_{{\color{#fcd34d}{1}}},\, {\color{#93c5fd}{a}}_{{\color{#fcd34d}{2}}}+{\color{#93c5fd}{b}}_{{\color{#fcd34d}{2}}}) \)</div>
+          <div class="math-row">\( |\vec{{\color{#93c5fd}{a}}}| {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}_{{\color{#fcd34d}{1}}}^{{\color{#fb923c}{2}}}+{\color{#93c5fd}{a}}_{{\color{#fcd34d}{2}}}^{{\color{#fb923c}{2}}}}}} \) <span class="math-comment">// norma / modulul</span></div>
+          <div class="math-row">\( \vec{{\color{#93c5fd}{a}}}\cdot\vec{{\color{#93c5fd}{b}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{a}}_{{\color{#fcd34d}{1}}} {\color{#93c5fd}{b}}_{{\color{#fcd34d}{1}}}+{\color{#93c5fd}{a}}_{{\color{#fcd34d}{2}}} {\color{#93c5fd}{b}}_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{=}} |\vec{{\color{#93c5fd}{a}}}||\vec{{\color{#93c5fd}{b}}}|{\color{#86efac}{\cos}}\theta \)</div>
+          <div class="math-row">\( \vec{{\color{#93c5fd}{a}}}\perp\vec{{\color{#93c5fd}{b}}} {\color{#f0abfc}{\iff}} \vec{{\color{#93c5fd}{a}}}\cdot\vec{{\color{#93c5fd}{b}}}{\color{#f0abfc}{=}}{\color{#fcd34d}{0}} \qquad {\color{#86efac}{\cos}}\theta {\color{#f0abfc}{=}} \dfrac{\vec{{\color{#93c5fd}{a}}}\cdot\vec{{\color{#93c5fd}{b}}}}{|\vec{{\color{#93c5fd}{a}}}||\vec{{\color{#93c5fd}{b}}}|} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEOMETRIE ANALITICA -->
+    <div class="section" id="geometrie-an">
+      <div class="section-header">
+        <span class="section-number">+</span>
+        <h2 class="section-title">Geometrie analitică</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Formule de bază în plan</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{AB}} {\color{#f0abfc}{=}} {\color{#86efac}{\sqrt{({\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}}-{\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}})^{{\color{#fb923c}{2}}}+({\color{#93c5fd}{y}}_{{\color{#fcd34d}{2}}}-{\color{#93c5fd}{y}}_{{\color{#fcd34d}{1}}})^{{\color{#fb923c}{2}}}}}} \) <span class="math-comment">// distanța A,B</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{M}} {\color{#f0abfc}{=}} \left(\dfrac{{\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}}+{\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}}}{{\color{#fcd34d}{2}}},\;\dfrac{{\color{#93c5fd}{y}}_{{\color{#fcd34d}{1}}}+{\color{#93c5fd}{y}}_{{\color{#fcd34d}{2}}}}{{\color{#fcd34d}{2}}}\right) \) <span class="math-comment">// mijlocul AB</span></div>
+          <div class="math-row">\( \mathcal{A}_{\triangle} {\color{#f0abfc}{=}} \dfrac{{\color{#fcd34d}{1}}}{{\color{#fcd34d}{2}}}\left|\det\begin{pmatrix}{\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}}&{\color{#93c5fd}{y}}_{{\color{#fcd34d}{1}}}&{\color{#fcd34d}{1}}\\{\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}}&{\color{#93c5fd}{y}}_{{\color{#fcd34d}{2}}}&{\color{#fcd34d}{1}}\\{\color{#93c5fd}{x}}_{{\color{#fcd34d}{3}}}&{\color{#93c5fd}{y}}_{{\color{#fcd34d}{3}}}&{\color{#fcd34d}{1}}\end{pmatrix}\right| \)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DREAPTA -->
+    <div class="section" id="dreapta">
+      <div class="section-header">
+        <span class="section-number">+</span>
+        <h2 class="section-title">Dreapta în plan</h2>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">Ecuațiile dreptei</div>
+        <div class="mjx-block">
+          <div class="math-row">\( {\color{#93c5fd}{a}}{\color{#93c5fd}{x}} + {\color{#93c5fd}{b}}{\color{#93c5fd}{y}} + {\color{#93c5fd}{c}} {\color{#f0abfc}{=}} {\color{#fcd34d}{0}} \) <span class="math-comment">// forma generală</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{y}} {\color{#f0abfc}{=}} {\color{#93c5fd}{m}}{\color{#93c5fd}{x}} + {\color{#93c5fd}{n}} \) <span class="math-comment">// m = pantă, n = ordonată la origine</span></div>
+          <div class="math-row">\( {\color{#93c5fd}{m}} {\color{#f0abfc}{=}} \dfrac{{\color{#93c5fd}{y}}_{{\color{#fcd34d}{2}}}-{\color{#93c5fd}{y}}_{{\color{#fcd34d}{1}}}}{{\color{#93c5fd}{x}}_{{\color{#fcd34d}{2}}}-{\color{#93c5fd}{x}}_{{\color{#fcd34d}{1}}}} {\color{#f0abfc}{=}} {\color{#86efac}{\tan}}\alpha \) <span class="math-comment">// panta dreptei</span></div>
+          <div class="math-row">\( d_{{\color{#fcd34d}{1}}} \parallel d_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{m}}_{{\color{#fcd34d}{1}}} {\color{#f0abfc}{=}} {\color{#93c5fd}{m}}_{{\color{#fcd34d}{2}}} \qquad d_{{\color{#fcd34d}{1}}} \perp d_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{\iff}} {\color{#93c5fd}{m}}_{{\color{#fcd34d}{1}}}\cdot{\color{#93c5fd}{m}}_{{\color{#fcd34d}{2}}} {\color{#f0abfc}{=}} {\color{#f0abfc}{-}}{\color{#fcd34d}{1}} \)</div>
+          <div class="math-row">\( d({\color{#93c5fd}{P}}, d) {\color{#f0abfc}{=}} \dfrac{|{\color{#93c5fd}{a}}{\color{#93c5fd}{x}}_{{\color{#fcd34d}{0}}}+{\color{#93c5fd}{b}}{\color{#93c5fd}{y}}_{{\color{#fcd34d}{0}}}+{\color{#93c5fd}{c}}|}{{\color{#86efac}{\sqrt{{\color{#93c5fd}{a}}^{{\color{#fb923c}{2}}}+{\color{#93c5fd}{b}}^{{\color{#fb923c}{2}}}}}}} \) <span class="math-comment">// distanța de la P(x₀,y₀) la dreaptă</span></div>
+        </div>
+        <div class="ex-block">
+          <div class="ex-title">Distanța de la \({\color{#93c5fd}{O}}({\color{#fcd34d}{0}},{\color{#fcd34d}{0}})\) la \({\color{#fcd34d}{3}}{\color{#93c5fd}{x}}+{\color{#fcd34d}{4}}{\color{#93c5fd}{y}}-{\color{#fcd34d}{10}}={\color{#fcd34d}{0}}\)</div>
+          <div class="ex-step"><span class="step-num">1.</span>\( d = \dfrac{|{\color{#fcd34d}{3}}\cdot{\color{#fcd34d}{0}}+{\color{#fcd34d}{4}}\cdot{\color{#fcd34d}{0}}-{\color{#fcd34d}{10}}|}{{\color{#86efac}{\sqrt{{\color{#fcd34d}{9}}+{\color{#fcd34d}{16}}}}}} = \dfrac{{\color{#fcd34d}{10}}}{{\color{#fcd34d}{5}}} \)</div>
+          <div class="ex-step result-step"><span class="step-num">=</span>\( d = {\color{#fcd34d}{2}} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p style="text-align:center; color: var(--text3); font-family: 'JetBrains Mono', monospace; font-size:12px; padding-bottom: 40px;">
+      // matematica-m2-bac · cheatsheet complet · succes la examen! 🎓
+    </p>
+
+  </div><!-- end content -->
+</div><!-- end main -->
+
+<button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<script>
+  // ── Toggle subject collapse ──
+  function toggleSubject(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  // ── Mobile sidebar toggle ──
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // ── Active nav link on scroll ──
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const id = entry.target.id;
+        const link = document.querySelector(`.nav-item[href="#${id}"]`);
+        if (link) {
+          link.classList.add('active');
+          // open parent subject
+          link.closest('.nav-subject')?.classList.add('open');
+        }
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ── Search filter ──
+  document.getElementById('search-input').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    navLinks.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      const match = text.includes(q);
+      link.style.display = match || !q ? '' : 'none';
+    });
+    // show all subjects when searching
+    if (q) {
+      document.querySelectorAll('.nav-subject').forEach(s => s.classList.add('open'));
+    }
+  });
+
+  // Close sidebar on link click (mobile)
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    });
+  });
+
+  // ── MathJax typeset — wait for loader + DOM ──
+  document.addEventListener('DOMContentLoaded', () => {
+    // MathJax startup promise handles loader dependencies automatically
+    if (window.MathJax) {
+      MathJax.startup = MathJax.startup || {};
+      MathJax.startup.promise = (MathJax.startup.promise || Promise.resolve())
+        .then(() => MathJax.typesetPromise && MathJax.typesetPromise());
+    }
+  });
+  // Fallback: also try on window load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+      }
+    }, 200);
+  });
+</script>
+</body>
+</html>
